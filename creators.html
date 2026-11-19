@@ -70,7 +70,8 @@ stories:["Stories","ستوريز"],product:["Product sent","المنتجات ا�
 save:["Save","احفظي"],none:["Nothing to chase right now.","مفيش حاجة مطلوبة دلوقتي."],noRow:["Not on THIS MONTH yet — saving adds her.","لسه مش في THIS MONTH — الحفظ هيضيفها."],
 first:["First month: 4 pieces","أول شهر: ٤ قطع"],cap:["Allowance {n}","الألاونس {n}"],
 t_date:["Agree Reel {n} date","اتفقي على معاد ريل {n}"],t_cut:["Reel {n}: cut due {d}","ريل {n}: الكت مطلوب {d}"],t_go:["Reel {n}: cut in, waiting for Omar's GO","ريل {n}: الكت وصل، مستني GO من عمر"],t_post:["Reel {n}: GO given, not posted","ريل {n}: خدت GO ومتنشرش"],t_late:["Reel {n} late: due by the {d}th","ريل {n} متأخر: كان قبل {d}"],
-t_files:["Files due in Drive by the 28th","الفايلات مطلوبة على الدرايف قبل ٢٨"],t_st:["Stories {x} of {y}","ستوريز {x} من {y}"],tierDiff:["Tier on THIS MONTH says {t}","التير في THIS MONTH مكتوب {t}"]};
+t_files:["Files due in Drive by the 28th","الفايلات مطلوبة على الدرايف قبل ٢٨"],t_st:["Stories {x} of {y}","ستوريز {x} من {y}"],tierDiff:["Tier on THIS MONTH says {t}","التير في THIS MONTH مكتوب {t}"],
+items:["Items taken","القطع اللي خدتها"],usedM:["This month","الشهر ده"],noItems:["Nothing logged yet.","لسه مفيش حاجة متسجلة."],itDate:["Date taken","تاريخ الاستلام"],itVal:["Value at list (EGP)","القيمة بسعر البيع"],itWhat:["What she took","خدت إيه"],itPh:["e.g. Black Crop Top M, Leggings S","مثلاً: كروب توب أسود M، ليجنز S"],itNote:["Order # or where (optional)","رقم الأوردر أو منين (اختياري)"],itAdd:["+ Add items","+ ضيفي القطع"],sure:["Remove this line?","تمسحي السطر ده؟"]};
 function t(k,v){var s=(T[k]||[k,k])[L==="ar"?1:0];if(v)for(var x in v)s=s.split("{"+x+"}").join(v[x]);return s;}
 function $(i){return document.getElementById(i);}
 function h(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
@@ -106,8 +107,13 @@ var x='<details class="card cr" id="c'+i+'"'+(open?" open":"")+' ontoggle="OPEN[
 x+='<div class="lk" style="margin-top:6px">'+(c.ig?'<a target="_blank" href="https://instagram.com/'+h(c.ig.replace("@",""))+'">'+h(c.ig)+'</a>':'')+(c.folder?'<a target="_blank" href="'+h(c.folder)+'">Drive</a>':'')+(c.wa?'<a target="_blank" href="https://wa.me/'+h(c.wa.replace(/[^0-9]/g,""))+'">WhatsApp</a>':'')+'</div>';
 if(!c.row)x+='<div class="msg" style="color:var(--warn)">'+h(t("noRow"))+'</div>';
 [["r1",1],["r2",2]].forEach(function(z){var p=z[0],n=z[1];x+='<div class="rl"><b>'+h(t(p))+'</b>'+(c["go"+n]?' <span class="tag '+(isGo(c["go"+n])?"ok":"bad")+'">'+h(t("check"))+': '+h(c["go"+n])+'</span>':'')+'<div class="g3">'+dinp(p+"date","date",c[p+"date"])+dinp(p+"cut","cut",c[p+"cut"])+dinp(p+"post","post",c[p+"post"])+'</div></div>';});
-x+='<div class="rl g2"><div><label>'+h(t("stories"))+' ('+(amb(c)?8:4)+')</label><input inputmode="numeric" data-f="stories" value="'+h(c.stories)+'" oninput="dirty(this)"></div><div><label>'+h(t("allow"))+'</label><input inputmode="numeric" data-f="allow" value="'+h(c.allow)+'" oninput="dirty(this)"></div></div>';
-x+='<label>'+h(t("product"))+'</label><input data-f="product" value="'+h(c.product)+'" oninput="dirty(this)">';
+x+='<div class="rl"><label>'+h(t("stories"))+' ('+(amb(c)?8:4)+')</label><input inputmode="numeric" data-f="stories" value="'+h(c.stories)+'" oninput="dirty(this)"></div>';
+var ym=D.today.slice(0,7),used=c.log.filter(function(r){return r.date.slice(0,7)===ym;}).reduce(function(a,r){return a+r.value;},0);
+x+='<div class="rl"><b>'+h(t("items"))+'</b> <span class="tag'+(!c.first&&used>(amb(c)?4500:2500)?" bad":"")+'">'+h(t("usedM"))+': '+fm(used)+(c.first?'':' / '+(amb(c)?"4,500":"2,500"))+'</span>';
+x+=c.log.length?c.log.map(function(r){return '<div style="display:flex;gap:8px;align-items:flex-start;font-size:13px;margin-top:8px"><div style="flex:1"><b>'+h(dd(r.date))+'</b> · '+h(r.items)+(r.note?' <small>('+h(r.note)+')</small>':'')+'<br><small>'+fm(r.value)+' EGP</small></div><button class="more" onclick="delItem('+i+','+r.row+')">✕</button></div>';}).join(""):'<div style="font-size:13px;color:var(--mute);margin-top:6px">'+h(t("noItems"))+'</div>';
+x+='<div class="g2" style="margin-top:6px"><div><label>'+h(t("itDate"))+'</label><input type="date" id="id'+i+'" value="'+h(D.today)+'"></div><div><label>'+h(t("itVal"))+'</label><input id="iv'+i+'" inputmode="numeric"></div></div>';
+x+='<label>'+h(t("itWhat"))+'</label><input id="iw'+i+'" placeholder="'+h(t("itPh"))+'"><label>'+h(t("notes"))+'</label><input id="in'+i+'" placeholder="'+h(t("itNote"))+'">';
+x+='<button class="go" style="margin-top:10px;background:#fff;color:var(--ink);border:1.5px solid var(--ink)" onclick="addItem('+i+')">'+h(t("itAdd"))+'</button><div class="msg" id="im'+i+'"></div></div>';
 if(amb(c))x+='<label class="ck"><input type="checkbox" data-f="files"'+(c.files?" checked":"")+' onchange="dirty(this)">'+h(t("files"))+'</label>';
 x+='<label class="ck"><input type="checkbox" data-f="chased"'+(c.chased?" checked":"")+' onchange="dirty(this)">'+h(t("chased"))+'</label>';
 x+='<label>'+h(t("notes"))+'</label><input data-f="notes" value="'+h(c.notes)+'" oninput="dirty(this)">';
@@ -124,5 +130,9 @@ function save(i){var c=D.list[i],el=$("c"+i),f={},m=el.querySelector(".msg:last-
 el.querySelectorAll("[data-f]").forEach(function(e){var k=e.getAttribute("data-f");f[k]=e.type==="checkbox"?e.checked:e.value.trim();});
 b.disabled=true;m.className="msg";m.textContent="…";
 call("save",{name:c.name,f:f}).then(function(r){toast("✓ "+c.name);el.classList.remove("dirty");load(true);}).catch(function(e){b.disabled=false;m.className="msg bad";m.textContent=e.message;});}
+function addItem(i){var c=D.list[i],m=$("im"+i);m.className="msg";m.textContent="…";
+call("item",{name:c.name,date:$("id"+i).value,items:$("iw"+i).value,value:$("iv"+i).value,note:$("in"+i).value}).then(function(){toast("✓ "+c.name);OPEN[i]=true;load(true);}).catch(function(e){m.className="msg bad";m.textContent=e.message;});}
+function delItem(i,row){var c=D.list[i],r=c.log.filter(function(z){return z.row===row;})[0];if(!r||!confirm(t("sure")))return;
+call("delitem",{name:c.name,row:row,items:r.items}).then(function(s){toast(s);OPEN[i]=true;load(true);}).catch(function(e){alert(e.message);});}
 chrome();load(true);setInterval(function(){load(false);},60000);
 </script></body></html>
