@@ -1,74 +1,97 @@
 <!doctype html><html><head><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" href="icon-owner.png"><link rel="icon" href="icon-owner.png"><meta name="apple-mobile-web-app-title" content="FT Owner"><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#1d1d1b">
-<title>FIT TRIBE owner</title><style>
-:root{--bg:#f4f3ef;--card:#fff;--ink:#1d1d1b;--mute:#6b6a66;--line:#e7e5df}
-*{box-sizing:border-box}body{font-family:-apple-system,Roboto,Arial,sans-serif;margin:0;padding:14px 14px 40px;background:var(--bg);color:var(--ink)}
-.w{max-width:620px;margin:auto}h1{font-size:22px;margin:0}.upd{font-size:12px;color:var(--mute);margin:2px 0 12px}
-.fl{border-radius:12px;padding:10px 12px;margin-bottom:6px;font-size:14px;display:flex;gap:8px}.fl b{flex:none}
-.red{background:#fde7e4;color:#8a1c12}.amber{background:#fff1d6;color:#7a4b00}.green{background:#e6f4ea;color:#1b7a3a}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin:12px 0}
-.card h2{font-size:16px;margin:0 0 8px;display:flex;justify-content:space-between}.card h2 a{font-size:12px;font-weight:400;color:#1a56b0}
-.g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.g div{background:#f7f6f2;border-radius:10px;padding:8px}
-.g b{display:block;font-size:19px}.g span{font-size:11px;color:var(--mute)}
-.li{font-size:13px;color:#444;margin-top:8px;line-height:1.5}
-</style><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Nunito:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet"><style>/* FIT TRIBE brand layer */
-:root{--bg:#f4f4f2;--card:#fff;--ink:#0b0b0b;--mute:#7a7873;--line:#e9e8e4}
-body{font-family:"Nunito","Noto Sans Arabic",-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
-h1,h2,.o,.a,.t b,.nav button,.chip,button,.tag,.why,.age,.g b,.card h2{font-family:"Instrument Sans","Noto Sans Arabic",-apple-system,sans-serif}
-.bar0{background:rgba(255,255,255,.93);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);margin:0 -14px 14px;padding:12px 14px 10px;border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:10px}.brand img{width:30px;height:28px;object-fit:contain;flex:none}
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Nunito:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<title>FT Owner</title><style>
+:root{--bg:#f4f4f2;--card:#fff;--ink:#0b0b0b;--mute:#7a7873;--line:#e9e8e4;--ok:#1b7a3a;--bad:#b3261e;--warn:#8a5a12}
+*{box-sizing:border-box}body{margin:0;padding:0 0 70px;font-family:"Nunito","Noto Sans Arabic",-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+h1,h2,button,.chip,.tag,.t b,.sz span{font-family:"Instrument Sans","Noto Sans Arabic",-apple-system,sans-serif}
+.w{max-width:560px;margin:auto;padding:0 14px}
+.bar0{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.93);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);margin:0 -14px 14px;padding:12px 14px 10px;border-bottom:1px solid var(--line)}
+.hrow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.brand{display:flex;align-items:center;gap:10px}.brand img{width:30px;height:28px;object-fit:contain}
 .brand small{display:block;font:700 10px/1 "Instrument Sans",sans-serif;letter-spacing:.24em;color:var(--mute);margin-bottom:4px}
-h1{font-size:19px;font-weight:700;letter-spacing:.01em;text-transform:uppercase;line-height:1.1}
-.upd{margin-top:6px}
-.lang{background:var(--ink);color:#fff;border:0;font-weight:700;width:38px;height:38px;border-radius:50%;padding:0;font-size:14px;flex:none}
-.nav button{border-radius:999px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px;padding:10px;border:1.5px solid var(--line)}
+h1{font-size:19px;margin:0;font-weight:700;text-transform:uppercase;line-height:1.1}
+.upd{font-size:12px;color:var(--mute);margin-top:6px}
+.lang{background:var(--ink);color:#fff;border:0;font-weight:700;width:38px;height:38px;border-radius:50%;font-size:14px}
+.nav{display:flex;gap:6px;margin-top:10px}.nav button{flex:1;border-radius:999px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px;padding:10px;border:1.5px solid var(--line);background:#fff}
 .nav button.on,.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
-.t,.prog,.box,.pc,.sec,.dl,details.hd,.empty,.card{border:0;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);border-radius:18px}
-.c{border:0;border-inline-start:4px solid #d4d4d0;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);border-radius:18px}
-.t b{font-size:26px;font-weight:700;letter-spacing:-.02em}
-.t span,.t small{text-transform:uppercase;letter-spacing:.09em;font-size:10px;font-weight:700}
-.tiles .t:first-child{background:var(--ink);color:#fff}.tiles .t:first-child span,.tiles .t:first-child small{color:rgba(255,255,255,.62)}
-.pbar{height:6px;background:#ecebe7}.pbar i{background:var(--ink)}
-.chip{border:1.5px solid #dedcd7;text-transform:uppercase;letter-spacing:.07em;font-size:11px;font-weight:700;padding:8px 13px}
-button{border-radius:12px}
-.bt .ok,.pb,.go,.scan,.big{background:var(--ink);color:#fff;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:13px}
-.pr{border-width:1.5px;font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:.06em}
-.fa,.mb{border:1.5px solid #d6d4cf;font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:.06em;color:#333;background:#fff}
-.o{font-size:17px;letter-spacing:-.01em}.a{letter-spacing:-.02em}
-.im{border-radius:12px}
-input,select,textarea{border:1.5px solid #e3e1dc;border-radius:12px;background:#fafaf8}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);background:#fff}
-.qa a,.qa button{border-radius:999px;background:#f2f2ef;border:0;font-weight:700;font-size:12.5px}
-h2{text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:var(--mute)}
-.foot{text-align:center;margin:30px 0 6px;font:700 10px "Instrument Sans",sans-serif;letter-spacing:.34em;color:#b9b7b1}
-.foot img{display:block;width:22px;margin:0 auto 8px;opacity:.35}
-.toast{border-radius:999px;padding:12px 18px;font-weight:600}
-.age,.why,.tag{font-weight:600;letter-spacing:.02em}
-.fl{border-radius:14px;font-weight:600}
-.chart i{background:var(--ink)}.chart i.z{background:#e7e6e2}.box>b{display:block;text-transform:uppercase;letter-spacing:.1em;font:700 11px "Instrument Sans",sans-serif;color:var(--mute)}
-</style></head><body><div class="w"><div class="brand" style="margin-bottom:4px"><img src="https://fittribeeg.com/cdn/shop/files/black.svg?v=1734551963" alt="FIT TRIBE"><div><small>FIT TRIBE · OWNER</small><h1>Team today</h1></div></div><div class="upd" id="upd">Loading…</div><div id="out"></div><div class="foot"><img src="https://fittribeeg.com/cdn/shop/files/black.svg?v=1734551963" alt="">FIT TRIBE · TEAM</div></div>
+.card{background:var(--card);border-radius:18px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);padding:14px;margin-bottom:10px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.t{background:#fff;border-radius:18px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05)}.t:first-child{background:var(--ink);color:#fff}
+.t span{display:block;text-transform:uppercase;letter-spacing:.09em;font-size:10px;font-weight:700;opacity:.65}.t b{font-size:24px;letter-spacing:-.02em}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:6px}
+.chip{border:1.5px solid #dedcd7;background:#fff;border-radius:999px;text-transform:uppercase;letter-spacing:.07em;font-size:11px;font-weight:700;padding:8px 13px;white-space:nowrap}
+input,textarea{font:inherit;width:100%;padding:11px;border:1.5px solid #e3e1dc;border-radius:12px;background:#fafaf8;font-size:16px}
+input:focus,textarea:focus{outline:none;border-color:var(--ink);background:#fff}
+.srch{margin-bottom:10px}
+.ln h2{font-size:15px;margin:0}.ln small{color:var(--mute)}
+.szs{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px;margin:10px 0}
+.sz span{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--mute);margin-bottom:3px;text-align:center}
+.sz input{text-align:center;padding:10px 4px;font-weight:700}
+.go{width:100%;background:var(--ink);color:#fff;border:0;border-radius:12px;padding:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:13px;cursor:pointer}
+.go:disabled{opacity:.4}
+.more{background:none;border:0;color:var(--mute);font-size:12px;text-decoration:underline;padding:4px 0;cursor:pointer}
+.msg{font-size:13px;margin-top:6px}.msg.bad{color:var(--bad)}.msg.ok{color:var(--ok)}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:8px;background:#eeede9;margin:4px 4px 0 0}
+.tag.bad{background:#fbe4e2;color:var(--bad)}.tag.ok{background:#e3f1e7;color:var(--ok)}.tag.warn{background:#fdf0dc;color:var(--warn)}
+label{display:block;font:700 11px "Instrument Sans",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:12px 0 5px}
+.left{font-size:14px;margin-top:8px}.left b{font-size:18px}
+.st{width:100%;border-collapse:collapse;font-size:13px}.st td{padding:7px 4px;border-top:1px solid #f0eee9;text-align:center}.st td:first-child{text-align:start}
+.st th{font-size:10px;letter-spacing:.08em;color:var(--mute);padding:4px;text-align:center}.st th:first-child{text-align:start}
+.neg{color:var(--bad);font-weight:700}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;transition:.25s;z-index:9}.toast.on{transform:translateX(-50%) translateY(0)}
+.empty{text-align:center;color:var(--mute);padding:24px}
+.foot{text-align:center;margin-top:24px;opacity:.5}.foot img{width:22px}
+[dir=rtl] .st td:first-child,[dir=rtl] .st th:first-child{text-align:right}
+.nav{overflow-x:auto}.nav button{flex:none;padding:10px 12px;font-size:11px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}.g3 div{background:#f6f5f2;border-radius:12px;padding:9px}.g3 b{display:block;font:700 18px "Instrument Sans",sans-serif}.g3 span{font-size:11px;color:var(--mute)}
+.fl{border-radius:14px;padding:10px 12px;margin-bottom:6px;font-size:14px}.fl b{margin-inline-end:6px}.red{background:#fbe4e2;color:#8a1c12}.amber{background:#fdf0dc;color:#7a4b00}.green{background:#e3f1e7;color:#1b7a3a}
+.bars{display:flex;align-items:flex-end;gap:6px;height:110px;margin-top:10px}.bars div{flex:1;text-align:center;font-size:10px;color:var(--mute)}.bars i{display:block;background:var(--ink);border-radius:6px 6px 0 0;margin-bottom:4px}
+.bars div.td i{background:#c9a24a}.li{font-size:13px;line-height:1.55;margin-top:8px}.open{display:inline-block;margin-top:10px;font:700 12px "Instrument Sans",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--ink);padding:9px 14px;border-radius:999px;text-decoration:none}
+.card h2{font-size:15px;margin:0;text-transform:none;letter-spacing:0;color:var(--ink)}.card h2 small{font-weight:400;color:var(--mute);font-size:12px}
+</style></head><body><div class="w">
+<div class="bar0"><div class="hrow"><div class="brand"><img src="https://fittribeeg.com/cdn/shop/files/black.svg?v=1734551963" alt=""><div><small>FIT TRIBE</small><h1>Owner</h1></div></div><button class="lang" onclick="load(true)">↻</button></div>
+<div class="upd" id="upd">…</div>
+<div class="nav"><button id="n0" onclick="go(0)">Today</button><button id="n1" onclick="go(1)">Team</button><button id="n2" onclick="go(2)">Money</button><button id="n3" onclick="go(3)">Stock</button><button id="n4" onclick="go(4)">Approvals</button></div></div>
+<div id="v"><div class="empty">Loading…</div></div>
+<div class="foot"><img src="https://fittribeeg.com/cdn/shop/files/black.svg?v=1734551963" alt=""></div></div>
 <script>
-var KEY="%%KEY%%",API="https://script.google.com/macros/s/AKfycbzG7jdDzu1dBZjfl88suQminLFWBoBVlddPW82h3ivcxB6X0zL3wZ317zBvsQogu_Fw/exec";
+var KEY="%%KEY%%",API="https://script.google.com/macros/s/AKfycbzG7jdDzu1dBZjfl88suQminLFWBoBVlddPW82h3ivcxB6X0zL3wZ317zBvsQogu_Fw/exec",APIF="https://script.google.com/macros/s/AKfycbyEWthT56FMP43wH_-kbirXhLClPDTjuJe7CK2JZBIv6DUOUwe3tH8WXMqhYFF0xN8IzQ/exec";
 try{if(KEY.indexOf("%%")===0){KEY=new URLSearchParams(location.search).get("k")||localStorage.getItem("ftk_o")||"";localStorage.setItem("ftk_o",KEY);}}catch(e){}
-function call(fn,a){return new Promise(function(res,rej){var q={key:KEY,fn:fn,a:a||{}};
-if(window.google&&google.script&&google.script.run){google.script.run.withSuccessHandler(res).withFailureHandler(rej).call(q);}
-else fetch(API,{method:"POST",body:JSON.stringify(q)}).then(function(r){return r.json();}).then(function(j){j.error?rej(new Error(j.error)):res(j.ok);}).catch(rej);});}
-function h(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});}
-function f(n){return Math.round(n||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");}
-function tile(v,l){return '<div><b>'+h(v)+'</b><span>'+h(l)+'</span></div>';}
-var SH="https://docs.google.com/spreadsheets/d/";
-function go(){call("owner").then(function(o){document.getElementById("upd").textContent="Updated "+o.at+" · refreshes every 2 minutes";var x="";
-var red=o.flags.filter(function(z){return z.l==="red";}),amb=o.flags.filter(function(z){return z.l!=="red";});
-if(!o.flags.length)x+='<div class="fl green"><b>✓</b>Nothing needs you right now.</div>';
-red.concat(amb).forEach(function(z){x+='<div class="fl '+z.l+'"><b>'+h(z.who)+'</b>'+h(z.t)+'</div>';});
-var R=o.roaa||{},S=o.stock||{},F=o.farida||{},Di=o.dina||{},Ha=o.haidy||{};
-x+='<div class="card"><h2>Roaa — returns <a href="'+SH+'10w7ZyiP-6Lc_tw1iD-bh3vMEJz4vnMe2vboYNJuN4sY" target="_blank">sheet</a></h2>'+(R.err?h(R.err):'<div class="g">'+tile(R.n,"pieces waiting")+tile(R.today,"answered today")+tile(R.oldest+"d","oldest waiting")+'</div>'+
-(R.problems?'<div class="li">'+R.problems+' problem answer(s) today</div>':'')+(R.recent&&R.recent.length?'<div class="li">'+R.recent.map(function(d){return h(d.time+" "+d.order+" · "+d.answer);}).join("<br>")+'</div>':''))+'</div>';
-x+='<div class="card"><h2>Roaa — stock count <a href="'+SH+'1-W2UpGxnTz1HarkSaULpbmu-Ybshh-vS6tp1ln62hoA" target="_blank">sheet</a></h2>'+(S.err?h(S.err):'<div class="g">'+tile(S.next?"Day "+S.next:"All done","next to count")+tile(S.last,"last day ticked")+tile(S.since===null?"—":S.since+"d","since last count")+'</div>')+'</div>';
-x+='<div class="card"><h2>Farida — refunds <a href="'+SH+'1YaRr2TVefK52aq8huCvP5DVEKLrhWGAF3_XQkv6V7B8" target="_blank">sheet</a></h2>'+(F.err?h(F.err):'<div class="g">'+tile(f(F.egp),F.n+" still to pay (EGP)")+tile(F.oldest+"d","oldest waiting")+tile(f(F.weekEGP),F.weekN+" paid, last 7 days")+tile(F.old5,"waiting 5+ days")+tile(F.hold,"on hold")+tile(F.monthNoShot,"no-screenshot closes this month")+'</div>'+
-(F.ask&&F.ask.length?'<div class="li"><b>Asks you:</b><br>'+F.ask.map(h).join("<br>")+'</div>':''))+'</div>';
-x+='<div class="card"><h2>Dina — District 5 drawer <a href="'+SH+'1AKZRA6zzV3iaORKh8FY4sr_sxfzLozpsyZdTyeN7OWc" target="_blank">sheet</a></h2>'+(Di.err?h(Di.err):'<div class="g">'+tile(Di.days+"d","without a till count")+tile(Di.since,"last counted")+tile(Di.last?Di.last.sent:"—","last transfer"+(Di.last?" · "+Di.last.date:""))+'</div><div class="li">'+h(Di.due)+'</div>')+'</div>';
-x+='<div class="card"><h2>Haidy — shoot money <a href="'+SH+'1N9M3Q8xu44BhvCGbvvuDdhYM24AwpD0nWmidNwsaDE0" target="_blank">sheet</a></h2>'+(Ha.err?h(Ha.err):'<div class="g">'+tile(f(Ha.left),"left with her (EGP)")+tile(f(Ha.spent),"spent · "+Ha.n+" payments")+tile(Ha.missing,"with no reason")+'</div><div class="li">Sent: '+h(Ha.sent)+'</div>')+'</div>';
-document.getElementById("out").innerHTML=x;}).catch(function(e){document.getElementById("upd").textContent="Could not load: "+e.message;});}
-go();setInterval(function(){if(!document.hidden)go();},120000);
+function $(i){return document.getElementById(i);}
+function h(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function f(n){return Math.round(Number(n)||0).toLocaleString("en-US");}
+function post(url,fn){return fetch(url,{method:"POST",body:JSON.stringify({key:KEY,fn:fn,a:{}})}).then(function(r){return r.json();}).then(function(j){if(j.error)throw new Error(j.error);return j.ok;});}
+function call(fn){return new Promise(function(res,rej){if(window.google&&google.script&&google.script.run){google.script.run.withSuccessHandler(res).withFailureHandler(rej).call({key:KEY,fn:fn,a:{}});}else post(API,fn).then(res).catch(rej);});}
+var O=null,S=null,TAB=0,SE="";
+function go(i){TAB=i;for(var k=0;k<5;k++)$("n"+k).className=k===i?"on":"";render();window.scrollTo(0,0);}
+function load(){call("owner").then(function(o){O=o;render();}).catch(function(e){$("upd").textContent=e.message;});
+post(APIF,"sales").then(function(s){S=s;SE="";render();}).catch(function(e){SE=e.message;render();});}
+function tl(v,l){return '<div><b>'+h(v)+'</b><span>'+h(l)+'</span></div>';}
+function card(t,sub,body,url){return '<div class="card"><h2>'+h(t)+(sub?' <small>'+h(sub)+'</small>':'')+'</h2>'+body+(url?'<a class="open" target="_blank" href="'+h(url)+'">Open app →</a>':'')+'</div>';}
+function app(w){var a=(O.apps||[]).filter(function(x){return x.who===w;})[0];return a?a.url:"";}
+function flags(only){return (O.flags||[]).filter(function(z){return !only||z.l===only;}).map(function(z){return '<div class="fl '+z.l+'"><b>'+h(z.who)+'</b>'+h(z.t)+'</div>';}).join("");}
+function render(){if(!O){return;}$("upd").textContent="Updated "+O.at+(S?" · sales "+S.at:"");var x="",R=O.roaa||{},St=O.stock||{},F=O.farida||{},Di=O.dina||{},Ha=O.haidy||{},Cr=O.creators||{},D5=O.d5||{},RL=O.roaaLast;
+if(TAB===0){if(S){var td=S.today,y=S.days[S.days.length-2],wk=S.days.slice(0,7),avg=wk.reduce(function(a,d){return a+d.egp;},0)/7,mx=Math.max.apply(null,S.days.map(function(d){return d.egp;}))||1;
+x+='<div class="tiles"><div class="t"><span>Sales today</span><b>'+f(td.egp)+'</b><small>EGP · '+td.n+' orders</small></div><div class="t"><span>AOV today</span><b>'+f(td.n?td.egp/td.n:0)+'</b><small>EGP</small></div></div>';
+x+=card("Last 8 days","EGP, cancelled and test orders left out",'<div class="g3">'+tl(f(y.egp),"yesterday · "+y.n+" orders")+tl(f(avg),"7-day average")+tl(f(td.posEgp),"District 5 today · "+td.pos)+'</div><div class="bars">'+S.days.map(function(d,i){return '<div class="'+(i===S.days.length-1?"td":"")+'"><i style="height:'+Math.round(80*d.egp/mx)+'px"></i>'+d.d.slice(8)+'</div>';}).join("")+'</div>');}
+else x+='<div class="card">'+(SE?"Sales could not load: "+h(SE):"Loading sales…")+'</div>';
+x+=(O.flags&&O.flags.length?flags():'<div class="fl green"><b>✓</b>Nothing needs you right now.</div>');}
+if(TAB===1){x+=card("Roaa","returns + stock count",R.err?h(R.err):'<div class="g3">'+tl(R.n,"pieces waiting")+tl(R.today,"answered today")+tl(R.oldest+"d","oldest waiting")+'</div><div class="g3">'+tl(St.next?"Day "+St.next:"—","next count day")+tl(St.last,"last day ticked")+tl(St.since==null?"—":St.since+"d","since last count")+'</div>',app("Roaa"));
+x+=card("Farida","refunds",F.err?h(F.err):'<div class="g3">'+tl(F.n,"to pay")+tl(f(F.egp),"EGP owed")+tl(F.oldest+"d","oldest")+'</div>',app("Farida"));
+x+=card("Dina Gamal","District 5",Di.err?h(Di.err):'<div class="g3">'+tl(Di.days+"d","since till count")+tl(Di.since||"—","last counted")+tl(D5.behind?String(D5.behind).split(" ")[0]:"0","lines to count")+'</div>',app("Dina Gamal"));
+x+=card("Haidy","shoot costs",Ha.err?h(Ha.err):'<div class="g3">'+tl(f(Ha.left),"EGP left")+tl(Ha.n,"payments")+tl(Ha.missing,"missing details")+'</div>',app("Haidy"));
+x+=card("Dina","creators",Cr.err?h(Cr.err):'<div class="g3">'+tl(Cr.live,"live creators")+tl(Cr.posted+" / "+Cr.live*2,"reels posted")+tl((Cr.go||[]).length,"waiting for GO")+'</div>',app("Dina"));}
+if(TAB===2){x+=card("Refunds to pay","Farida",F.err?h(F.err):'<div class="g3">'+tl(f(F.egp),"EGP · "+F.n+" refunds")+tl(f(F.weekEGP),"paid last 7 days · "+F.weekN)+tl(F.old5,"waiting 5+ days")+'</div>');
+x+=card("District 5 drawer","Dina Gamal",Di.err?h(Di.err):'<div class="li">Transfer due: <b>'+h(Di.due)+'</b><br>Last counted: '+h(Di.since)+' ('+h(Di.days)+' days)'+(Di.last?'<br>Last transfer: '+h(Di.last.date)+' · '+h(Di.last.sent)+' EGP':'')+'</div>');
+x+=card("Haidy's shoot money","",Ha.err?h(Ha.err):'<div class="g3">'+tl(f(Ha.left),"EGP left")+tl(Ha.sent,"you sent")+tl(f(Ha.spent),"EGP spent")+'</div>');
+x+=card("Creators' product","this month at list price",Cr.err?h(Cr.err):'<div class="g3">'+tl(f(Cr.items),"EGP taken")+tl(Cr.live,"live creators")+'</div><div class="li">Commission is worked out on PAY on the 3rd.</div>');}
+if(TAB===3){x+=card("Office stock count","Roaa",St.err?h(St.err):'<div class="g3">'+tl(St.next?"Day "+St.next:"—","next day")+tl(St.last,"last ticked")+tl(St.since==null?"—":St.since+"d","since")+'</div>'+(RL?'<div class="li">Last filed count: '+h(RL.date)+' · '+RL.lines+' lines · '+f(RL.pieces)+' pieces'+(RL.chk?(RL.diffs?' · <b style="color:var(--bad)">'+RL.diffs+' sizes off</b>':' · all matched'):' · not checked against the system')+'</div>':''),app("Roaa"));
+x+=card("District 5 stock","from Shopify · "+(D5.read||""),D5.err?h(D5.err):'<div class="g3">'+tl(f(D5.pieces),"pieces")+tl(D5.lines,"lines")+tl(D5.neg,"lines below zero")+'</div>'+(D5.negList&&D5.negList.length?'<div class="li"><b>Below zero:</b><br>'+D5.negList.map(h).join("<br>")+'</div>':'')+'<div class="li">'+h(D5.behind)+'</div>',app("Dina Gamal"));}
+if(TAB===4){var go=(Cr.go||[]),ask=(F.ask||[]);x+=card("Reels waiting for your GO",go.length+" cut"+(go.length===1?"":"s"),go.length?'<div class="li">'+go.map(h).join("<br>")+'</div>':'<div class="li">None.</div>',app("Dina"));
+x+=card("Farida is asking you",ask.length+"",ask.length?'<div class="li">'+ask.map(h).join("<br>")+'</div>':'<div class="li">Nothing.</div>',app("Farida"));
+if(Cr.tierOff&&Cr.tierOff.length)x+=card("Creator tiers to fix","ROSTER vs THIS MONTH",'<div class="li">'+Cr.tierOff.map(h).join("<br>")+'</div>');
+x+=card("All flags","",flags()||'<div class="li">None.</div>');}
+$("v").innerHTML=x;}
+go(0);load();setInterval(function(){if(!document.hidden)load();},120000);
 </script></body></html>

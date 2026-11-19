@@ -138,7 +138,7 @@ cT:["Day {d} count","جرد يوم {d}"],cP:["{a} of {b} colours counted","ات�
 cH:["Type the number under each size. 0 = none there · grey = size does not exist. A colour saves by itself once every size is filled.","اكتبي الرقم تحت كل مقاس. صفر = مفيش · الرمادي = المقاس مش موجود. اللون بيتحفظ لوحده لما كل المقاسات تتملي."],
 cDone:["Mark day {d} done","علّمي يوم {d} تمّ"],cLeft:["{n} colours are not counted yet. Tap again to mark the day done anyway.","فاضل {n} لون ماتعدّوش. دوسي تاني لو عايزة تعلّمي اليوم تمّ."],
 cAll:["All 6 days are done. Day 1 comes back once the sheet is emptied.","الستة أيام خلصوا. يوم ١ هيرجع لما الشيت يتفضّى."],
-cMarked:["Day {d} marked done ✓","يوم {d} اتعلّم تمّ ✓"],cSaved:["Saved {t}","اتحفظ {t}"],cNum:["Numbers only","أرقام بس"],cFill:["Fill every size to save (0 if none)","املي كل المقاسات علشان يتحفظ (صفر لو مفيش)"]};
+cMarked:["Day {d} marked done ✓","يوم {d} اتعلّم تمّ ✓"],cDay:["Day {d}","يوم {d}"],cNext:["next","التالي"],cHist:["History","السجل"],hNone:["No past counts yet.","لسه مفيش جرد قديم."],hLines:["{l} lines · {p} pieces","{l} سطر · {p} قطعة"],hDiff:["{n} sizes off · {a} pieces","{n} مقاس مختلف · {a} قطعة"],hOk:["All matched","كله مطابق"],hNo:["not checked against the system","ماتقارنش بالسيستم"],hCyc:["Cycle {c}","دورة {c}"],hSys:["system","السيستم"],cSaved:["Saved {t}","اتحفظ {t}"],cNum:["Numbers only","أرقام بس"],cFill:["Fill every size to save (0 if none)","املي كل المقاسات علشان يتحفظ (صفر لو مفيش)"]};
 function t(k,v){var s=(T[k]||[k,k])[L==="ar"?1:0];if(v)for(var x in v)s=s.split("{"+x+"}").join(v[x]);return s;}
 function h(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});}
 function call(fn,a){return new Promise(function(res,rej){var q={key:KEY,fn:fn,a:a||{}};
@@ -207,9 +207,16 @@ if(P.trk.indexOf(d)>-1||P.order.replace(/\D/g,"")===d||(d.length>=5&&P.order.ind
 if(hit===null){toast(t("nomatch",{c:c}));Q=d||c;render();return;}
 Q="";FL="all";render();var el=$("p"+hit);el.scrollIntoView({behavior:"smooth",block:"start"});el.classList.add("hit");setTimeout(function(){el.classList.remove("hit");},2500);toast(t("found",{o:D.w.parcels[hit].order}));}
 /* ---- stock count ---- */
-function loadC(){$("vc").innerHTML='<div class="empty">'+h(t("ld"))+'</div>';call("count").then(function(c){C=c;renderC();}).catch(function(e){$("vc").innerHTML='<div class="empty" onclick="loadC()">'+h(t("err"))+'<br><small>'+h(e.message)+'</small></div>';});}
+var CI="",HV=false,HD=null;
+function dayBar(){if(!C||!C.days)return "";return '<div class="chips">'+C.days.map(function(d){return '<button class="chip'+(!HV&&C.idx===d.i?" on":"")+'" onclick="HV=false;loadC('+d.i+')">'+h(t("cDay",{d:d.day}))+(d.done?" ✓":"")+(d.i===C.next?" · "+h(t("cNext")):"")+'</button>';}).join("")+'<button class="chip'+(HV?" on":"")+'" onclick="showH()">'+h(t("cHist"))+'</button></div>';}
+function showH(){HV=true;var bar=dayBar();$("vc").innerHTML=bar+'<div class="empty">'+h(t("ld"))+'</div>';(HD?Promise.resolve(HD):call("history")).then(function(d){HD=d;renderH();}).catch(function(e){$("vc").innerHTML=bar+'<div class="empty">'+h(e.message)+'</div>';});}
+function renderH(){var x=dayBar();if(!HD.length)x+='<div class="empty">'+h(t("hNone"))+'</div>';
+HD.forEach(function(g){x+='<details class="sec"><summary>'+h(g.date)+' <small>'+h(t("hCyc",{c:g.cycle}))+' · '+h(g.by)+'</small><div class="sub" style="margin:4px 0 0">'+h(t("hLines",{l:g.lines,p:g.pieces}))+' · '+(g.diffs?'<b style="color:var(--bad)">'+h(t("hDiff",{n:g.diffs,a:g.abs}))+'</b>':(g.chk?'<b style="color:var(--ok)">'+h(t("hOk"))+'</b>':'<span>'+h(t("hNo"))+'</span>'))+'</div></summary>';
+g.top.forEach(function(r){x+='<div style="padding:8px 12px;border-top:1px solid var(--line);font-size:13px"><b>'+h(r.c)+'</b> · '+h(r.s)+' '+h(r.z)+'<br><small>'+h(r.r)+'</small> — '+h(r.n)+' vs '+h(t("hSys"))+' '+h(r.sys)+' <b style="color:var(--bad)">'+(r.d>0?"+":"")+r.d+'</b></div>';});x+='</details>';});
+$("vc").innerHTML=x;}
+function loadC(i){if(i!==undefined)CI=i;$("vc").innerHTML=dayBar()+'<div class="empty">'+h(t("ld"))+'</div>';call("count",{idx:CI}).then(function(c){C=c;renderC();}).catch(function(e){$("vc").innerHTML='<div class="empty" onclick="loadC()">'+h(t("err"))+'<br><small>'+h(e.message)+'</small></div>';});}
 function cStat(){var a=0,b=0;C.tabs.forEach(function(T){T.rows.forEach(function(r){b++;if(r.date===C.today)a++;});});return [a,b];}
-function renderC(){if(!C.day){$("vc").innerHTML='<div class="empty">'+h(t("cAll"))+'</div>';return;}var s=cStat(),html='<h2 style="margin-top:4px">'+h(t("cT",{d:C.day}))+'</h2><p class="sub">'+h(C.shelves)+'</p>';
+function renderC(){if(!C.day){$("vc").innerHTML=dayBar()+'<div class="empty">'+h(t("cAll"))+'</div>';return;}var s=cStat(),html=dayBar()+'<h2 style="margin-top:4px">'+h(t("cT",{d:C.day}))+'</h2><p class="sub">'+h(C.shelves)+'</p>';
 html+='<div class="prog" id="cprog">'+h(t("cP",{a:s[0],b:s[1]}))+'<div class="pbar"><i style="width:'+(s[1]?Math.round(100*s[0]/s[1]):0)+'%"></i></div></div><p class="sub">'+h(t("cH"))+'</p>';
 C.tabs.forEach(function(T,ti){var dn=T.rows.filter(function(r){return r.date===C.today;}).length;html+='<details class="sec"'+(dn<T.rows.length?" open":"")+'><summary>'+h(T.name)+' <small>'+dn+' / '+T.rows.length+'</small></summary>';
 T.rows.forEach(function(r,ri){html+='<div class="cr'+(r.date===C.today?" done":"")+'" id="c'+ti+"_"+ri+'">'+(r.img?'<img class="im" loading="lazy" src="'+h(r.img)+'" onclick="zoom(this.src)" alt="">':'<div class="ni">·</div>')+'<div class="cn2"><b>'+h(r.colour)+'</b><div class="sz">'+h(r.range)+'</div><div class="sg">';
@@ -223,6 +230,6 @@ if(bad){ck.className="ck e";ck.textContent=t("cNum");return;}if(vals.indexOf("")
 call("saveCount",{tab:T.name,row:r.row,dc:T.dc,range:r.range,colour:r.colour,vals:vals}).then(function(x){r.date=x.date;r.by=x.by;r.cells=vals;el.classList.add("done");ck.textContent=t("cSaved",{t:x.by.replace(/^.*app /,"")});
 var s=cStat();$("cprog").innerHTML=h(t("cP",{a:s[0],b:s[1]}))+'<div class="pbar"><i style="width:'+Math.round(100*s[0]/s[1])+'%"></i></div>';}).catch(function(e){ck.className="ck e";ck.textContent=e.message;});}
 var ddArm=false;function dayDone(){var s=cStat();if(s[0]<s[1]&&!ddArm){ddArm=true;$("ddm").textContent=t("cLeft",{n:s[1]-s[0]});return;}
-$("dd").disabled=true;call("dayDone",{rrow:C.rrow,day:C.day}).then(function(){toast(t("cMarked",{d:C.day}));C=null;ddArm=false;loadC();}).catch(function(e){$("dd").disabled=false;$("ddm").textContent=e.message;});}
+$("dd").disabled=true;call("dayDone",{rrow:C.rrow,day:C.day}).then(function(){toast(t("cMarked",{d:C.day}));C=null;ddArm=false;CI="";loadC();}).catch(function(e){$("dd").disabled=false;$("ddm").textContent=e.message;});}
 chrome();$("ld").textContent=t("ld");load();
 </script></body></html>
