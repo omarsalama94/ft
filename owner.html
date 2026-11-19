@@ -43,7 +43,10 @@ label{display:block;font:700 11px "Instrument Sans",sans-serif;letter-spacing:.0
 .empty{text-align:center;color:var(--mute);padding:24px}
 .foot{text-align:center;margin-top:24px;opacity:.5}.foot img{width:22px}
 [dir=rtl] .st td:first-child,[dir=rtl] .st th:first-child{text-align:right}
-.nav{overflow-x:auto}.nav button{flex:none;padding:10px 12px;font-size:11px}
+.nav{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.nav button{padding:9px 2px;font-size:9.5px;letter-spacing:.04em;min-width:0}
+.tiles .t b{font-size:22px}.tiles .t small{display:block;margin-top:2px}
+.pick{display:flex;flex-wrap:wrap;gap:6px}.pick .chip{cursor:pointer}.pk2 label{display:block;font:700 11px "Instrument Sans",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:12px 0 5px}
+.more{background:none;border:0;color:var(--mute);text-decoration:underline;margin-top:8px}.msg{font-size:13px;margin-top:6px}.msg.bad{color:var(--bad)}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}.g3 div{background:#f6f5f2;border-radius:12px;padding:9px}.g3 b{display:block;font:700 18px "Instrument Sans",sans-serif}.g3 span{font-size:11px;color:var(--mute)}
 .fl{border-radius:14px;padding:10px 12px;margin-bottom:6px;font-size:14px}.fl b{margin-inline-end:6px}.red{background:#fbe4e2;color:#8a1c12}.amber{background:#fdf0dc;color:#7a4b00}.green{background:#e3f1e7;color:#1b7a3a}
 .bars{display:flex;align-items:flex-end;gap:6px;height:110px;margin-top:10px}.bars div{flex:1;text-align:center;font-size:10px;color:var(--mute)}.bars i{display:block;background:var(--ink);border-radius:6px 6px 0 0;margin-bottom:4px}
@@ -61,12 +64,23 @@ try{if(KEY.indexOf("%%")===0){KEY=new URLSearchParams(location.search).get("k")|
 function $(i){return document.getElementById(i);}
 function h(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
 function f(n){return Math.round(Number(n)||0).toLocaleString("en-US");}
-function post(url,fn){return fetch(url,{method:"POST",body:JSON.stringify({key:KEY,fn:fn,a:{}})}).then(function(r){return r.json();}).then(function(j){if(j.error)throw new Error(j.error);return j.ok;});}
-function call(fn){return new Promise(function(res,rej){if(window.google&&google.script&&google.script.run){google.script.run.withSuccessHandler(res).withFailureHandler(rej).call({key:KEY,fn:fn,a:{}});}else post(API,fn).then(res).catch(rej);});}
-var O=null,S=null,TAB=0,SE="";
+function post(url,fn,a){return fetch(url,{method:"POST",body:JSON.stringify({key:KEY,fn:fn,a:a||{}})}).then(function(r){return r.json();}).then(function(j){if(j.error)throw new Error(j.error);return j.ok;});}
+var O=null,S=null,TAB=0,SE="",FORM=false,PT="",PH="",PC="",FV={};
+function call(fn,a){return new Promise(function(res,rej){if(window.google&&google.script&&google.script.run){google.script.run.withSuccessHandler(res).withFailureHandler(rej).call({key:KEY,fn:fn,a:a||{}});}else post(API,fn,a).then(res).catch(rej);});}
+function rd(f){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(String(r.result).split(",")[1]);};r.onerror=rej;r.readAsDataURL(f);});}
+function shrink(f){return new Promise(function(res){if(!/^image\//.test(f.type))return rd(f).then(function(d){res({d:d,t:f.type});});var img=new Image(),u=URL.createObjectURL(f);img.onload=function(){var s=Math.min(1,1600/Math.max(img.width,img.height)),cv=document.createElement("canvas");cv.width=img.width*s;cv.height=img.height*s;cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);res({d:cv.toDataURL("image/jpeg",.85).split(",")[1],t:"image/jpeg"});};img.onerror=function(){rd(f).then(function(d){res({d:d,t:f.type});});};img.src=u;});}
+try{var c0=JSON.parse(localStorage.getItem("ft_own_cache")||"null");if(c0){O=c0.O;S=c0.S;}}catch(e){}
+function keep(){try{localStorage.setItem("ft_own_cache",JSON.stringify({O:O,S:S}));}catch(e){}}
+function busyForm(){var a=document.activeElement;return FORM&&TAB===2&&((a&&/INPUT|TEXTAREA/.test(a.tagName))||($("pa")&&$("pa").value));}
+function keepForm(){["pa","pd","pn","pw"].forEach(function(i){if($(i))FV[i]=$(i).value;});}
+function restoreForm(){["pa","pd","pn","pw"].forEach(function(i){if($(i)&&FV[i]!=null)$(i).value=FV[i];});if($("pd")&&!$("pd").value)$("pd").value=new Date(Date.now()+2*3600e3).toISOString().slice(0,10);}
+function sendPay(){keepForm();var m=$("pm"),b=$("pb"),fl=$("pf").files[0];m.className="msg";m.textContent="…";b.disabled=true;
+(fl?shrink(fl):Promise.resolve(null)).then(function(p){return call("ownerPay",{to:PT,cat:PC,who:$("pw")?$("pw").value:"",amount:$("pa").value,how:PH,date:$("pd").value,note:$("pn").value,data:p?p.d:"",type:p?p.t:"",name:fl?fl.name:""});})
+.then(function(r){FORM=false;PT="";PH="";PC="";FV={};alert("✓ "+r);load();}).catch(function(e){b.disabled=false;m.className="msg bad";m.textContent=e.message;});}
+
 function go(i){TAB=i;for(var k=0;k<5;k++)$("n"+k).className=k===i?"on":"";render();window.scrollTo(0,0);}
-function load(){call("owner").then(function(o){O=o;render();}).catch(function(e){$("upd").textContent=e.message;});
-post(APIF,"sales").then(function(s){S=s;SE="";render();}).catch(function(e){SE=e.message;render();});}
+function load(){call("owner").then(function(o){O=o;keep();if(!busyForm())render();}).catch(function(e){$("upd").textContent=e.message;});
+post(APIF,"sales").then(function(s){S=s;SE="";keep();if(!busyForm())render();}).catch(function(e){SE=e.message;render();});}
 function tl(v,l){return '<div><b>'+h(v)+'</b><span>'+h(l)+'</span></div>';}
 function card(t,sub,body,url){return '<div class="card"><h2>'+h(t)+(sub?' <small>'+h(sub)+'</small>':'')+'</h2>'+body+(url?'<a class="open" target="_blank" href="'+h(url)+'">Open app →</a>':'')+'</div>';}
 function app(w){var a=(O.apps||[]).filter(function(x){return x.who===w;})[0];return a?a.url:"";}
@@ -82,7 +96,16 @@ x+=card("Farida","refunds",F.err?h(F.err):'<div class="g3">'+tl(F.n,"to pay")+tl
 x+=card("Dina Gamal","District 5",Di.err?h(Di.err):'<div class="g3">'+tl(Di.days+"d","since till count")+tl(Di.since||"—","last counted")+tl(D5.behind?String(D5.behind).split(" ")[0]:"0","lines to count")+'</div>',app("Dina Gamal"));
 x+=card("Haidy","shoot costs",Ha.err?h(Ha.err):'<div class="g3">'+tl(f(Ha.left),"EGP left")+tl(Ha.n,"payments")+tl(Ha.missing,"missing details")+'</div>',app("Haidy"));
 x+=card("Dina","creators",Cr.err?h(Cr.err):'<div class="g3">'+tl(Cr.live,"live creators")+tl(Cr.posted+" / "+Cr.live*2,"reels posted")+tl((Cr.go||[]).length,"waiting for GO")+'</div>',app("Dina"));}
-if(TAB===2){x+=card("Refunds to pay","Farida",F.err?h(F.err):'<div class="g3">'+tl(f(F.egp),"EGP · "+F.n+" refunds")+tl(f(F.weekEGP),"paid last 7 days · "+F.weekN)+tl(F.old5,"waiting 5+ days")+'</div>');
+if(TAB===2){var P=O.pays||{},M=P.month||{};
+x+='<div class="card"><h2>Money I sent <small>this month</small></h2><div class="g3">'+tl(f(M.haidy),"to Haidy")+tl(f(M.farida),"to Farida")+tl(f(M.direct),"paid directly")+'</div>';
+if(!FORM)x+='<button class="go" style="margin-top:12px" onclick="FORM=true;render()">+ Log money I sent</button>';
+else{x+='<div class="pk2"><label>Sent to</label><div class="pick">'+[["haidy","Haidy · shoot budget"],["farida","Farida · refunds"],["direct","Paid directly"]].map(function(z){return '<button class="chip'+(PT===z[0]?" on":"")+'" onclick="keepForm();PT=\''+z[0]+'\';render()">'+h(z[1])+'</button>';}).join("")+'</div>';
+if(PT==="direct")x+='<label>For</label><div class="pick">'+["Studio","Model","Photographer","Videographer","Makeup / hair","Props / styling","Transport","Food","Other"].map(function(z){return '<button class="chip'+(PC===z?" on":"")+'" onclick="keepForm();PC=\''+z+'\';render()">'+h(z)+'</button>';}).join("")+'</div><label>Who you paid</label><input id="pw" placeholder="Name">';
+x+='<label>Amount (EGP)</label><input id="pa" inputmode="numeric"><label>How</label><div class="pick">'+["InstaPay","Cash","Bank transfer","Vodafone Cash","Card"].map(function(z){return '<button class="chip'+(PH===z?" on":"")+'" onclick="keepForm();PH=\''+z+'\';render()">'+h(z)+'</button>';}).join("")+'</div>';
+x+='<label>Date</label><input id="pd" type="date"><label>Screenshot'+(PH==="Cash"?" (optional for cash)":"")+'</label><input id="pf" type="file" accept="image/*,application/pdf"><label>Note</label><input id="pn" placeholder="e.g. Winter shoot day 2">';
+x+='<button class="go" style="margin-top:12px" id="pb" onclick="sendPay()">Save</button><button class="more" onclick="FORM=false;render()">Cancel</button><div class="msg" id="pm"></div></div>';}
+x+=(P.rows&&P.rows.length?'<div class="li">'+P.rows.map(function(r){return '<b>'+h(r.d)+'</b> · '+h(r.to)+(r.who?' · '+h(r.cat)+' · '+h(r.who):'')+' · <b>'+f(r.amt)+'</b> '+h(r.how)+(r.shot?' <a target="_blank" href="'+h(r.shot)+'">🧾</a>':'');}).join("<br>")+'</div>':'')+(P.url?'<div class="li"><a target="_blank" href="'+h(P.url)+'">Open the sheet</a></div>':'')+'</div>';
+x+=card("Refunds to pay","Farida",F.err?h(F.err):'<div class="g3">'+tl(f(F.egp),"EGP · "+F.n+" refunds")+tl(f(F.weekEGP),"paid last 7 days · "+F.weekN)+tl(F.old5,"waiting 5+ days")+'</div>');
 x+=card("District 5 drawer","Dina Gamal",Di.err?h(Di.err):'<div class="li">Transfer due: <b>'+h(Di.due)+'</b><br>Last counted: '+h(Di.since)+' ('+h(Di.days)+' days)'+(Di.last?'<br>Last transfer: '+h(Di.last.date)+' · '+h(Di.last.sent)+' EGP':'')+'</div>');
 x+=card("Haidy's shoot money","",Ha.err?h(Ha.err):'<div class="g3">'+tl(f(Ha.left),"EGP left")+tl(Ha.sent,"you sent")+tl(f(Ha.spent),"EGP spent")+'</div>');
 x+=card("Creators' product","this month at list price",Cr.err?h(Cr.err):'<div class="g3">'+tl(f(Cr.items),"EGP taken")+tl(Cr.live,"live creators")+'</div><div class="li">Commission is worked out on PAY on the 3rd.</div>');}
@@ -92,6 +115,6 @@ if(TAB===4){var go=(Cr.go||[]),ask=(F.ask||[]);x+=card("Reels waiting for your G
 x+=card("Farida is asking you",ask.length+"",ask.length?'<div class="li">'+ask.map(h).join("<br>")+'</div>':'<div class="li">Nothing.</div>',app("Farida"));
 if(Cr.tierOff&&Cr.tierOff.length)x+=card("Creator tiers to fix","ROSTER vs THIS MONTH",'<div class="li">'+Cr.tierOff.map(h).join("<br>")+'</div>');
 x+=card("All flags","",flags()||'<div class="li">None.</div>');}
-$("v").innerHTML=x;}
-go(0);load();setInterval(function(){if(!document.hidden)load();},120000);
+$("v").innerHTML=x;if(FORM&&TAB===2)restoreForm();}
+go(0);if(O)render();load();setInterval(function(){if(!document.hidden)load();},120000);
 </script></body></html>
