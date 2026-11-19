@@ -1,0 +1,114 @@
+<!doctype html><html><head><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" href="icon-haidy.png"><link rel="icon" href="icon-haidy.png"><meta name="apple-mobile-web-app-title" content="Shoot pay"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Nunito:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Haidy</title><style>
+:root{--bg:#f4f4f2;--card:#fff;--ink:#0b0b0b;--mute:#7a7873;--line:#e9e8e4;--ok:#1b7a3a;--bad:#b3261e;--warn:#8a5a12}
+*{box-sizing:border-box}body{margin:0;padding:0 0 70px;font-family:"Nunito","Noto Sans Arabic",-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+h1,h2,button,.chip,.tag,.t b,.sz span{font-family:"Instrument Sans","Noto Sans Arabic",-apple-system,sans-serif}
+.w{max-width:560px;margin:auto;padding:0 14px}
+.bar0{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.93);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);margin:0 -14px 14px;padding:12px 14px 10px;border-bottom:1px solid var(--line)}
+.hrow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.brand{display:flex;align-items:center;gap:10px}.brand img{width:30px;height:28px;object-fit:contain}
+.brand small{display:block;font:700 10px/1 "Instrument Sans",sans-serif;letter-spacing:.24em;color:var(--mute);margin-bottom:4px}
+h1{font-size:19px;margin:0;font-weight:700;text-transform:uppercase;line-height:1.1}
+.upd{font-size:12px;color:var(--mute);margin-top:6px}
+.lang{background:var(--ink);color:#fff;border:0;font-weight:700;width:38px;height:38px;border-radius:50%;font-size:14px}
+.nav{display:flex;gap:6px;margin-top:10px}.nav button{flex:1;border-radius:999px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px;padding:10px;border:1.5px solid var(--line);background:#fff}
+.nav button.on,.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.card{background:var(--card);border-radius:18px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);padding:14px;margin-bottom:10px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.t{background:#fff;border-radius:18px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05)}.t:first-child{background:var(--ink);color:#fff}
+.t span{display:block;text-transform:uppercase;letter-spacing:.09em;font-size:10px;font-weight:700;opacity:.65}.t b{font-size:24px;letter-spacing:-.02em}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:6px}
+.chip{border:1.5px solid #dedcd7;background:#fff;border-radius:999px;text-transform:uppercase;letter-spacing:.07em;font-size:11px;font-weight:700;padding:8px 13px;white-space:nowrap}
+input,textarea{font:inherit;width:100%;padding:11px;border:1.5px solid #e3e1dc;border-radius:12px;background:#fafaf8;font-size:16px}
+input:focus,textarea:focus{outline:none;border-color:var(--ink);background:#fff}
+.srch{margin-bottom:10px}
+.ln h2{font-size:15px;margin:0}.ln small{color:var(--mute)}
+.szs{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px;margin:10px 0}
+.sz span{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--mute);margin-bottom:3px;text-align:center}
+.sz input{text-align:center;padding:10px 4px;font-weight:700}
+.go{width:100%;background:var(--ink);color:#fff;border:0;border-radius:12px;padding:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:13px;cursor:pointer}
+.go:disabled{opacity:.4}
+.more{background:none;border:0;color:var(--mute);font-size:12px;text-decoration:underline;padding:4px 0;cursor:pointer}
+.msg{font-size:13px;margin-top:6px}.msg.bad{color:var(--bad)}.msg.ok{color:var(--ok)}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:8px;background:#eeede9;margin:4px 4px 0 0}
+.tag.bad{background:#fbe4e2;color:var(--bad)}.tag.ok{background:#e3f1e7;color:var(--ok)}.tag.warn{background:#fdf0dc;color:var(--warn)}
+label{display:block;font:700 11px "Instrument Sans",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:12px 0 5px}
+.left{font-size:14px;margin-top:8px}.left b{font-size:18px}
+.st{width:100%;border-collapse:collapse;font-size:13px}.st td{padding:7px 4px;border-top:1px solid #f0eee9;text-align:center}.st td:first-child{text-align:start}
+.st th{font-size:10px;letter-spacing:.08em;color:var(--mute);padding:4px;text-align:center}.st th:first-child{text-align:start}
+.neg{color:var(--bad);font-weight:700}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;transition:.25s;z-index:9}.toast.on{transform:translateX(-50%) translateY(0)}
+.empty{text-align:center;color:var(--mute);padding:24px}
+.foot{text-align:center;margin-top:24px;opacity:.5}.foot img{width:22px}
+[dir=rtl] .st td:first-child,[dir=rtl] .st th:first-child{text-align:right}
+select{font:inherit;width:100%;padding:11px;border:1.5px solid #e3e1dc;border-radius:12px;background:#fafaf8;font-size:16px;-webkit-appearance:none}
+.pick{display:flex;flex-wrap:wrap;gap:6px}.pick .chip{cursor:pointer}
+.row h2{font-size:15px;margin:0}.row small{color:var(--mute)}
+</style></head><body><div class="w">
+<div class="bar0"><div class="hrow"><div class="brand"><img src="https://fittribeeg.com/cdn/shop/files/black.svg?v=1734551963" alt=""><div><small>FIT TRIBE</small><h1 id="h1">Shoot payments</h1></div></div><button class="lang" id="lg" onclick="swap()">ع</button></div>
+<div class="upd" id="upd">…</div>
+<div class="nav"><button id="n0" class="on" onclick="go(0)"></button><button id="n1" onclick="go(1)"></button></div></div>
+<div id="v"><div class="empty">…</div></div>
+<div class="foot"><img src="https://fittribeeg.com/cdn/shop/files/black.svg?v=1734551963" alt=""></div></div>
+<div class="toast" id="toast"></div>
+<script>
+var KEY="%%KEY%%",API="https://script.google.com/macros/s/AKfycbyZOadYFo_wZqsMyQi1_XGfTSbEtzR7QGYUObD7odPFxNeWdTi9efYDab74Dz-XxNS7/exec";
+try{if(KEY.indexOf("%%")===0){KEY=new URLSearchParams(location.search).get("k")||localStorage.getItem("ftk_hd")||"";localStorage.setItem("ftk_hd",KEY);}}catch(e){}
+var L="en";try{L=localStorage.getItem("ft_lang_hd")||"en";}catch(e){}
+var T={title:["Shoot payments","مصاريف التصوير"],n0:["New payment","دفعة جديدة"],n1:["My payments","دفعاتي"],
+upd:["Updated {t}","اتحدث {t}"],left:["Left with you","الباقي معاكي"],spent:["Spent so far","اتصرف لحد دلوقتي"],month:["This month","الشهر ده"],sent:["Omar has sent","عمر حوّل"],
+shot:["Screenshot or receipt","سكرين أو إيصال"],amount:["Amount (EGP)","المبلغ (جنيه)"],to:["Who you paid","دفعتي لمين"],toPh:["Name or number","الاسم أو الرقم"],
+how:["How you paid","دفعتي إزاي"],what:["What it was for","كان لإيه"],note:["Note (optional)","ملاحظة (اختياري)"],noteO:["Note: what was it for?","ملاحظة: كان لإيه؟"],
+save:["Save payment","احفظي الدفعة"],rule:["Pay first, then log it here with the screenshot. It goes straight onto your sheet.","ادفعي الأول، وبعدين سجليها هنا بالسكرين. بتتسجل على الشيت على طول."],
+need:["Missing: how you paid / what it was for","ناقص: دفعتي إزاي / كان لإيه"],fix:["Save","احفظي"],none:["No payments yet.","لسه مفيش دفعات."],
+fixHead:["{n} payments need two answers","{n} دفعات محتاجين إجابتين"],
+o:{"InstaPay":"إنستاباي","Cash":"كاش","Vodafone Cash":"فودافون كاش","Card":"كارت","Other":"حاجة تانية","Studio":"ستوديو","Model":"موديل","Photographer":"مصور","Videographer":"مصور فيديو","Makeup / hair":"ميكب / شعر","Props / styling":"إكسسوارات / ستايلنج","Transport":"مواصلات","Food":"أكل"}};
+function o(s){return L==="ar"&&T.o[s]?T.o[s]:s;}
+function t(k,v){var s=(T[k]||[k,k])[L==="ar"?1:0];if(v)for(var x in v)s=s.split("{"+x+"}").join(v[x]);return s;}
+function $(i){return document.getElementById(i);}
+function h(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function fm(n){n=Number(String(n).replace(/[^0-9.\-]/g,""))||0;return n.toLocaleString("en-US");}
+function call(fn,a){return new Promise(function(res,rej){var q={key:KEY,fn:fn,a:a||{}};
+if(window.google&&google.script&&google.script.run){google.script.run.withSuccessHandler(res).withFailureHandler(rej).call(q);}
+else fetch(API,{method:"POST",body:JSON.stringify(q)}).then(function(r){return r.json();}).then(function(j){j.error?rej(new Error(j.error)):res(j.ok);}).catch(rej);});}
+function rd(f){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(String(r.result).split(",")[1]);};r.onerror=rej;r.readAsDataURL(f);});}
+function shrink(f){return new Promise(function(res){if(!/^image\//.test(f.type))return rd(f).then(function(d){res({d:d,t:f.type});});var img=new Image(),u=URL.createObjectURL(f);img.onload=function(){var s=Math.min(1,1600/Math.max(img.width,img.height)),cv=document.createElement("canvas");cv.width=img.width*s;cv.height=img.height*s;cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);res({d:cv.toDataURL("image/jpeg",.85).split(",")[1],t:"image/jpeg"});};img.onerror=function(){rd(f).then(function(d){res({d:d,t:f.type});});};img.src=u;});}
+var D=null,TAB=0,HOWV="",WHATV="";
+function toast(s){var b=$("toast");b.textContent=s;b.classList.add("on");clearTimeout(b._t);b._t=setTimeout(function(){b.classList.remove("on");},3000);}
+function swap(){L=L==="ar"?"en":"ar";try{localStorage.setItem("ft_lang_hd",L);}catch(e){}chrome();render();}
+function chrome(){document.documentElement.lang=L;document.documentElement.dir=L==="ar"?"rtl":"ltr";$("h1").textContent=t("title");$("lg").textContent=L==="ar"?"EN":"ع";for(var i=0;i<2;i++){$("n"+i).textContent=t("n"+i);$("n"+i).className=TAB===i?"on":"";}if(D)$("upd").textContent=t("upd",{t:D.at});}
+function go(i){TAB=i;chrome();render();window.scrollTo(0,0);}
+function quiet(){var a=document.activeElement;return document.hidden||(a&&/INPUT|TEXTAREA|SELECT/.test(a.tagName))||($("pa")&&$("pa").value)||($("pf")&&$("pf").files.length);}
+function load(force){if(!force&&quiet())return;call("data").then(function(d){D=d;chrome();render();}).catch(function(e){$("upd").textContent=e.message;});}
+function chips(id,list,cur){return '<div class="pick" id="'+id+'">'+list.map(function(v){return '<button type="button" class="chip'+(v===cur?" on":"")+'" data-v="'+h(v)+'" onclick="pk(this)">'+h(o(v))+'</button>';}).join("")+'</div>';}
+function pk(b){var p=b.parentNode;p.querySelectorAll(".chip").forEach(function(c){c.classList.remove("on");});b.classList.add("on");if(p.id==="ph")HOWV=b.getAttribute("data-v");if(p.id==="pw"){WHATV=b.getAttribute("data-v");$("pn").placeholder=t(WHATV==="Other"?"noteO":"note");}}
+function val(p){var c=p.querySelector(".chip.on");return c?c.getAttribute("data-v"):"";}
+function render(){if(!D)return;var x="";
+x+='<div class="tiles"><div class="t"><span>'+h(t("left"))+'</span><b>'+h(D.left)+'</b></div><div class="t"><span>'+h(t("month"))+'</span><b>'+h(D.month)+'</b></div></div>';
+if(TAB===0){
+x+='<div class="card"><div style="font-size:13px;color:#444">'+h(t("rule"))+'</div>';
+x+='<label>'+h(t("shot"))+'</label><input id="pf" type="file" accept="image/*,application/pdf">';
+x+='<label>'+h(t("amount"))+'</label><input id="pa" inputmode="decimal">';
+x+='<label>'+h(t("to"))+'</label><input id="pt" placeholder="'+h(t("toPh"))+'">';
+x+='<label>'+h(t("how"))+'</label>'+chips("ph",D.how,HOWV);
+x+='<label>'+h(t("what"))+'</label>'+chips("pw",D.what,WHATV);
+x+='<label>'+h(t("note").split(" (")[0])+'</label><input id="pn" placeholder="'+h(t(WHATV==="Other"?"noteO":"note"))+'">';
+x+='<button class="go" style="margin-top:14px" id="pb" onclick="savePay()">'+h(t("save"))+'</button><div class="msg" id="pm"></div></div>';}
+if(TAB===1){var miss=D.rows.filter(function(r){return !r.how||!r.what;});
+x+='<div class="card" style="font-size:13px">'+h(t("spent"))+': <b>'+h(D.spent)+'</b><br>'+h(t("sent"))+': <b>'+h(D.sent)+'</b></div>';
+if(miss.length)x+='<h2 style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--warn);margin:14px 2px 8px">'+h(t("fixHead",{n:miss.length}))+'</h2>';
+x+=D.rows.length?D.rows.map(function(r){var m=!r.how||!r.what;return '<div class="card row" id="r'+r.row+'"><h2>'+h(r.amt)+' EGP</h2><small>'+h(r.date)+' · '+h(r.to)+'</small><div>'+(r.how?'<span class="tag">'+h(o(r.how))+'</span>':'')+(r.what?'<span class="tag">'+h(o(r.what))+'</span>':'')+(r.shot?'<a class="tag ok" target="_blank" href="'+h(r.shot)+'">🧾 '+h(t("shot").split(" ")[0])+'</a>':'<span class="tag bad">✗ '+h(t("shot").split(" ")[0])+'</span>')+'</div>'+(r.note?'<div style="font-size:12px;color:var(--mute);margin-top:4px">'+h(r.note)+'</div>':'')+
+(m?'<div style="margin-top:8px"><span class="tag warn">'+h(t("need"))+'</span><label>'+h(t("how"))+'</label>'+chips("h"+r.row,D.how,r.how)+'<label>'+h(t("what"))+'</label>'+chips("w"+r.row,D.what,r.what)+'<button class="go" style="margin-top:10px" onclick="fix('+r.row+')">'+h(t("fix"))+'</button><div class="msg"></div></div>':'')+'</div>';}).join(""):'<div class="empty">'+h(t("none"))+'</div>';}
+$("v").innerHTML=x;}
+function fix(row){var r=D.rows.filter(function(z){return z.row===row;})[0],c=$("r"+row),m=c.querySelector(".msg"),b=c.querySelector(".go");
+var hw=val($("h"+row)),wt=val($("w"+row));if(!hw||!wt){m.className="msg bad";m.textContent=t("need");return;}
+b.disabled=true;call("fix",{row:row,how:hw,what:wt,date:r.date,amt:r.amt}).then(function(s){toast("✓ "+s);load(true);}).catch(function(e){b.disabled=false;m.className="msg bad";m.textContent=e.message;});}
+function savePay(){var m=$("pm"),b=$("pb"),f=$("pf").files[0];m.className="msg";
+if(!f){m.className="msg bad";m.textContent=t("shot")+" ✗";return;}
+m.textContent="…";b.disabled=true;
+shrink(f).then(function(p){return call("pay",{amount:$("pa").value,to:$("pt").value,how:val($("ph")),what:val($("pw")),note:$("pn").value,data:p.d,type:p.t,name:f.name});})
+.then(function(r){toast("✓ "+r);HOWV="";WHATV="";$("pf").value="";$("pa").value="";load(true);}).catch(function(e){b.disabled=false;m.className="msg bad";m.textContent=e.message;});}
+chrome();load(true);setInterval(function(){load(false);},60000);
+</script></body></html>
