@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" href="icon-roaa.png"><link rel="icon" href="icon-roaa.png"><meta name="apple-mobile-web-app-title" content="Parcels"><meta charset="utf-8">
+<!doctype html><html><head><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" href="icon-roaa.png?v=2"><link rel="icon" href="icon-roaa.png?v=2"><meta name="apple-mobile-web-app-title" content="Parcels"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1d1d1b"><meta name="apple-mobile-web-app-capable" content="yes">
 <title>Parcels</title><style>
@@ -98,7 +98,7 @@ h2{text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:var(--mute
 .age,.why,.tag{font-weight:600;letter-spacing:.02em}
 .fl{border-radius:14px;font-weight:600}
 .chart i{background:var(--ink)}.chart i.z{background:#e7e6e2}.box>b{display:block;text-transform:uppercase;letter-spacing:.1em;font:700 11px "Instrument Sans",sans-serif;color:var(--mute)}
-.t[onclick]{cursor:pointer}.t[onclick]:active{opacity:.7}</style></head><body><div class="w">
+.t[onclick]{cursor:pointer}.t[onclick]:active{opacity:.7}.bsr{margin-top:8px}.bsm{font-size:13px;margin-top:6px;color:#555}.bimg{display:flex;gap:8px;overflow-x:auto;margin-top:6px}.bimg img{height:170px;border-radius:10px;display:block;background:#f2f1ee;cursor:zoom-in}.bpb{font:700 12.5px inherit;padding:7px 11px;border-radius:999px;border:0;background:#f2f2ef;cursor:pointer}</style></head><body><div class="w">
 <div class="bar0"><div class="hrow"><div class="brand"><img src="https://fittribeeg.com/cdn/shop/files/black.svg?v=1734551963" alt="FIT TRIBE"><div><small>FIT TRIBE</small><h1 id="h1"></h1></div></div><button class="lang" id="lang" onclick="setLang()">ع</button></div>
 <div class="upd" id="upd"></div>
 <div class="nav"><button id="nP" class="on" onclick="tab('p')"></button><button id="nC" onclick="tab('c')"></button></div></div>
@@ -118,7 +118,7 @@ tW:["pieces waiting","قطعة مستنية"],tP:["parcels","طرد"],tT:["answe
 prog:["Today: {a} answered, {b} to go","النهارده: {a} اتردّ عليها، فاضل {b}"],
 mix:["Parcels: {r} refund · {x} exchange · {nd} never delivered","الطرود: {r} مرتجع · {x} استبدال · {nd} ماتسلّمش"],
 all:["All","الكل"],r:["Refund","مرتجع"],x:["Exchange","استبدال"],nd:["Never delivered","ماتسلّمش"],
-scan:["📷 Scan label","📷 صوّري البوليصة"],find:["Order, name or tracking","رقم الأوردر أو الاسم أو التتبع"],
+scan:["📷 Scan label","📷 صوّري البوليصة"],bsB:["📷 Bosta photos","📷 صور بوسطة"],bsL:["Checking Bosta…","بنشوف بوسطة…"],bsStar:["Courier photo at pickup","صورة المندوب وقت الاستلام"],bsWeb:["Website photo","صورة الموقع"],bsNoStar:["No courier photo yet","لسه مفيش صورة من المندوب"],bsNF:["Not found on Bosta","مش لاقيينه على بوسطة"],find:["Order, name or tracking","رقم الأوردر أو الاسم أو التتبع"],
 bosta:["Today's Bosta delivery","توصيلة بوسطة النهارده"],empty:["Nothing is waiting. Every piece is answered.","مفيش حاجة مستنية. كل القطع اتردّ عليها."],
 today:["today","النهارده"],dw:["{d}d waiting","مستني {d} يوم"],pcs:["{n} piece(s)","{n} قطعة"],gets:["She gets","هتاخد"],
 ok:["OK — fine","تمام — سليمة"],pr:["Problem","فيها مشكلة"],fa:["Factory","مصنع"],
@@ -133,7 +133,7 @@ err:["Could not load. Tap to try again.","مقدرتش أحمّل. دوسي هن
 nomatch:["No parcel matches {c}. Type the order number instead.","مفيش طرد بالرقم {c}. اكتبي رقم الأوردر."],
 reading:["Reading the label…","بقرأ البوليصة…"],cant:["Could not read the barcode. Try closer, or type the order number.","مقدرتش أقرأ الباركود. قرّبي وجرّبي تاني أو اكتبي رقم الأوردر."],
 found:["Found {o}","لقيته: {o}"],
-wWrong:["Write what is wrong first.","اكتبي المشكلة الأول."],wIn:["Write what is inside the parcel first.","اكتبي فيه إيه جوّه الطرد الأول."],
+wWrong:["Write what is wrong first.","اكتبي المشكلة الأول."],wIn:["Write what is inside the parcel first.","اكتبي فيه إيه جوّه الطرد الأول."],wPick:["Pick the product first.","اختاري المنتج الأول."],pp:["What is inside — pick the product","فيه إيه جوّه — اختاري المنتج"],ppPh:["Search product…","دوّري على المنتج…"],psz:["Size","المقاس"],
 cT:["Day {d} count","جرد يوم {d}"],cP:["{a} of {b} colours counted","اتعدّ {a} من {b} لون"],
 cH:["Type the number under each size. 0 = none there · grey = size does not exist. A colour saves by itself once every size is filled.","اكتبي الرقم تحت كل مقاس. صفر = مفيش · الرمادي = المقاس مش موجود. اللون بيتحفظ لوحده لما كل المقاسات تتملي."],
 cDone:["Mark day {d} done","علّمي يوم {d} تمّ"],cLeft:["{n} colours are not counted yet. Tap again to mark the day done anyway.","فاضل {n} لون ماتعدّوش. دوسي تاني لو عايزة تعلّمي اليوم تمّ."],
@@ -159,7 +159,8 @@ function load(force){if(busy&&!force)return;busy=true;return call("data").then(f
 function quiet(){return document.hidden||document.querySelector(".pz.open")||(document.activeElement&&/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName));}
 setInterval(function(){if(!quiet()&&TAB==="p")load();},60000);
 document.addEventListener("visibilitychange",function(){if(!document.hidden&&TAB==="p"&&!quiet())load();});
-function render(){var w=D.w,dn=D.done,tp=w.r+w.x+w.nd,html="";
+function plist(){if(!D.prods||$("plist"))return;var dl=document.createElement("datalist");dl.id="plist";dl.innerHTML=D.prods.map(function(n){return '<option value="'+h(n)+'">';}).join("");document.body.appendChild(dl);}
+function render(){plist();var w=D.w,dn=D.done,tp=w.r+w.x+w.nd,html="";
 html+='<p class="sub">'+h(t("sub"))+'</p><div class="tiles"><div class="t" onclick="sc()"><b>'+w.n+'</b><span>'+t("tW")+'</span></div><div class="t" onclick="sc()"><b>'+w.parcels.length+'</b><span>'+t("tP")+'</span></div><div class="t" onclick="sc()"><b>'+dn.length+'</b><span>'+t("tT")+'</span></div><div class="t" onclick="sc()"><b>'+w.oldest+'d</b><span>'+t("tO")+'</span></div></div>';
 html+='<div class="prog">'+h(t("prog",{a:dn.length,b:w.n}))+'<div class="pbar"><i style="width:'+((dn.length+w.n)?Math.round(100*dn.length/(dn.length+w.n)):0)+'%"></i></div>';
 if(tp)html+='<div class="mix"><i style="width:'+100*w.r/tp+'%;background:#e8a49b"></i><i style="width:'+100*w.x/tp+'%;background:#f0c56b"></i><i style="width:'+100*w.nd/tp+'%;background:#a9b4c2"></i></div><div style="font-size:11px;color:#6b6a66;margin-top:4px">'+h(t("mix",{r:w.r,x:w.x,nd:w.nd}))+'</div>';
@@ -169,12 +170,13 @@ if(w.head)html+='<details class="hd"><summary>'+h(t("bosta"))+'</summary>'+h(w.h
 if(!w.parcels.length)html+='<div class="empty">'+h(t("empty"))+'</div>';
 w.parcels.forEach(function(P,pi){html+='<div class="pc" id="p'+pi+'" data-k="'+P.kind+'" data-s="'+h((P.order+" "+P.name+" "+P.trk.join(" ")).toLowerCase())+'"><div class="ph"><span class="o">'+h(P.order)+'</span><span class="age'+(P.days>=3?" old":"")+'">'+h(P.days===0?t("today"):t("dw",{d:P.days}))+'</span></div>';
 html+='<div class="nm">'+h(P.name)+' · '+h(t("pcs",{n:P.pieces.length}))+'</div><span class="why '+P.kind+'">'+h(P.why)+'</span>';
+html+='<div class="bsr" id="bsr'+pi+'">'+(BR[pi]||'<button class="bpb" onclick="bsR('+pi+')">'+h(t("bsB"))+'</button>')+'</div>';
 if(P.kind==="x"&&P.gets)html+='<div class="gets">↔ '+h(t("gets"))+': <b>'+h(P.gets)+'</b></div>';
 P.pieces.forEach(function(Z,zi){var id=pi+"_"+zi;html+='<div class="pz" id="z'+id+'">';
 if(Z.mystery)html+='<div class="my">'+h(t("my"))+'</div>';
 html+='<div class="row">'+(Z.img?'<img class="im" loading="lazy" src="'+h(Z.img)+'" onclick="zoom(this.src)" alt="">':'<div class="ni">?</div>')+'<div><div class="pn">'+h(Z.product||"?")+'</div><div class="sz">'+h(Z.size)+(Z.sku&&Z.sku!=="no SKU"?" · "+h(Z.sku):"")+(Number(Z.qty)>1?" · qty "+h(Z.qty):"")+'</div></div></div>';
 html+='<div class="bt"><button class="ok" onclick="quick(\''+id+'\')">'+h(t("ok"))+'</button><button class="pr" onclick="op(\''+id+'\',\'p\')">'+h(t("pr"))+'</button><button class="fa" onclick="op(\''+id+'\',\'f\')">'+h(t("fa"))+'</button></div>';
-html+='<div class="f"><label class="lp">'+h(t("wp"))+'</label><select class="an"><option value="damaged">'+h(t("damaged"))+'</option><option value="wrong">'+h(t("wrong"))+'</option><option value="missing">'+h(t("missing"))+'</option></select><label class="ln"></label><input class="no"><label>'+h(t("photo"))+'</label><input class="fi" type="file" accept="image/*"><button class="go" onclick="send(\''+id+'\')">'+h(t("save"))+'</button><button class="cn" onclick="cl(\''+id+'\')">'+h(t("cancel"))+'</button></div><div class="m"></div></div>';});
+html+='<div class="f">'+(Z.mystery?'<label>'+h(t("pp"))+'</label><input class="pp" list="plist" placeholder="'+h(t("ppPh"))+'" autocomplete="off"><label>'+h(t("psz"))+'</label><select class="ps"><option value="">—</option>'+["XS","S","M","L","XL","XXL","One size"].map(function(x){return '<option>'+x+'</option>';}).join("")+'</select>':'')+'<label class="lp">'+h(t("wp"))+'</label><select class="an"><option value="damaged">'+h(t("damaged"))+'</option><option value="wrong">'+h(t("wrong"))+'</option><option value="missing">'+h(t("missing"))+'</option></select><label class="ln"></label><input class="no"><label>'+h(t("photo"))+'</label><input class="fi" type="file" accept="image/*"><button class="go" onclick="send(\''+id+'\')">'+h(t("save"))+'</button><button class="cn" onclick="cl(\''+id+'\')">'+h(t("cancel"))+'</button></div><div class="m"></div></div>';});
 html+='</div>';});
 html+='<h2>'+h(t("done"))+'</h2><div class="dl">';if(!dn.length)html+='<div class="di"><span class="tx" style="color:#6b6a66">'+h(t("none"))+'</span></div>';
 dn.forEach(function(x,i){var c=x.answer.indexOf("OK")===0?"#1b7a3a":(x.answer.indexOf("PROBLEM")===0?"#b3261e":"#555");html+='<div class="di"><span class="tm">'+h(x.time)+'</span><span class="tx"><b>'+h(x.order)+'</b> · '+h(x.product)+' · '+h(x.size)+'<br><span style="color:'+c+'">'+h(x.answer)+'</span>'+(x.note?" · "+h(x.note):"")+'</span>'+(x.photo?'<a href="'+h(x.photo)+'" target="_blank">📷</a>':"")+'<button class="u" onclick="unT('+i+')">'+h(t("undo"))+'</button></div>';});
@@ -183,6 +185,13 @@ function flt(){var q=Q.trim().toLowerCase(),qd=q.replace(/\D/g,"");document.quer
 var okF=FL==="all"||p.getAttribute("data-k")===FL,okQ=!q||s.indexOf(q)>-1||(qd.length>=4&&s.replace(/\D/g," ").indexOf(qd)>-1);p.classList.toggle("hide",!(okF&&okQ));});}
 function piece(id){var a=id.split("_");return D.w.parcels[a[0]].pieces[a[1]];}
 function par(id){return D.w.parcels[id.split("_")[0]];}
+var APIF="https://script.google.com/macros/s/AKfycbyEWthT56FMP43wH_-kbirXhLClPDTjuJe7CK2JZBIv6DUOUwe3tH8WXMqhYFF0xN8IzQ/exec",BR={};
+function bsR(pi){var P=D.w.parcels[pi],e=$("bsr"+pi);if(!e)return;e.innerHTML='<div class="bsm">'+h(t("bsL"))+'</div>';
+fetch(APIF,{method:"POST",body:JSON.stringify({key:KEY,fn:"bosta",a:{order:P.order,trk:P.trk[0]||""}})}).then(function(r){return r.json();}).then(function(j){if(j.error)throw new Error(j.error);var b=j.ok||{};
+if(b.state!=="ok"){e.innerHTML='<div class="bsm">'+h(t("bsNF"))+'</div>';return;}
+var g=function(L){return '<div class="bimg">'+L.map(function(u){return '<img src="'+h(u)+'" onclick="zoom(this.src)">';}).join("")+'</div>';},S=b.star||[],W=b.imgs||[];
+var x='<div class="bsm">📦 '+h(b.tn)+' · '+h(b.st)+(b.at?' · '+h(b.at):'')+'</div><div class="bsm"><b>🚚 '+h(t("bsStar"))+'</b></div>'+(S.length?g(S):'<div class="bsm">'+h(t("bsNoStar"))+'</div>')+(W.length?'<div class="bsm"><b>🌐 '+h(t("bsWeb"))+'</b></div>'+g(W):'');
+BR[pi]=x;e.innerHTML=x;}).catch(function(err){e.innerHTML='<button class="bpb" onclick="bsR('+pi+')">'+h(t("bsB"))+'</button><div class="bsm">'+h(err.message)+'</div>';});}
 function zoom(s){$("lbi").src=s.replace("width=300","width=900");$("lb").classList.add("on");}
 function msg(z,s,ok){var m=z.querySelector(".m");m.className="m "+(ok?"g":"e");m.textContent=s;}
 function op(id,mode){var z=$("z"+id),my=piece(id).mystery;z.setAttribute("data-mode",mode);z.querySelector(".an").style.display=mode==="p"?"":"none";z.querySelector(".lp").style.display=mode==="p"?"":"none";
@@ -190,6 +199,7 @@ z.querySelector(".ln").textContent=mode==="p"?t("nReq"):(my?t("nIn"):t("nOpt"));
 function cl(id){$("z"+id).classList.remove("open");}
 function quick(id){if(piece(id).mystery)return op(id,"ok");go(id,"ok","",null);}
 function send(id){var z=$("z"+id),mode=z.getAttribute("data-mode"),a=mode==="p"?z.querySelector(".an").value:(mode==="f"?"factory":"ok"),n=z.querySelector(".no").value.trim(),fl=z.querySelector(".fi").files[0];
+if(piece(id).mystery){var pp=z.querySelector(".pp"),ps=z.querySelector(".ps"),pv=pp?pp.value.trim():"";if(!pv)return msg(z,t("wPick"));n=["Inside: "+pv,ps&&ps.value?"size "+ps.value:"",n].filter(String).join(" · ");}
 if(mode==="p"&&!n)return msg(z,t("wWrong"));if(piece(id).mystery&&!n)return msg(z,t("wIn"));
 if(!fl)return go(id,a,n,null);shrink(fl,function(ph){go(id,a,n,ph);});}
 function shrink(fl,cb){var rd=new FileReader();rd.onload=function(){var im=new Image();im.onload=function(){var k=Math.min(1,1600/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);
