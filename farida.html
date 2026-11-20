@@ -183,7 +183,7 @@ return x+'<button class="bpb" onclick="bsPic('+i+')">'+h(t("bPic",{n:b.imgs.leng
 function bsPic(i){var r=D.rows[i],b=BS[r.order];if(b){b.show=!b.show;bsPaint(r);}}
 function bsPaint(r){var i=D.rows.indexOf(r),e=$("bs"+i),b=BS[r.order];if(e)e.innerHTML=bsHtml(r,i);var l=$("bl"+i);if(l&&b&&b.tn){l.href="https://business.bosta.co/orders/"+b.tn;l.onclick=null;l.textContent="📦 "+t("bosta");}}
 function bsLoad(){var q=vis().filter(function(r){return !BS[r.order];});q.forEach(function(r){BS[r.order]={ld:1};});var n=0;
-function nx(){var r=q[n++];if(!r)return;call("bosta",{order:r.order,trk:r.trk,phone:phone(r)}).then(function(b){BS[r.order]=b||{state:"none"};bsPaint(r);nx();}).catch(function(){BS[r.order]={state:"err"};bsPaint(r);nx();});}
+function nx(){var r=q[n++];if(!r)return;call("bosta",{order:r.order,trk:r.trk,phone:phone(r)}).then(function(b){BS[r.order]=b||{state:"none"};bsPaint(r);nx();}).catch(function(){if(!r._rt){r._rt=1;q.push(r);}else{BS[r.order]={state:"err"};bsPaint(r);}nx();});}
 nx();nx();nx();}
 function rpRow(p,o){var links=(String(p.ref).match(/https?:\/\/\S+/g)||[]),txt=String(p.ref).replace(/https?:\/\/\S+/g,"").replace(/\s*·\s*$/,"").trim(),dig=String(p.order).replace(/\D/g,"");
 var sh=links.map(function(u){var m=u.match(/\/d\/([\w-]+)/)||u.match(/id=([\w-]+)/);return m?'<a class="shot" target="_blank" href="'+h(u)+'"><img data-id="'+h(m[1])+'"'+(TH[m[1]]?' src="'+TH[m[1]]+'"':'')+' alt=""></a>':'';}).join("");
