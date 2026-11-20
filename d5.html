@@ -43,7 +43,7 @@ label{display:block;font:700 11px "Instrument Sans",sans-serif;letter-spacing:.0
 .empty{text-align:center;color:var(--mute);padding:24px}
 .foot{text-align:center;margin-top:24px;opacity:.5}.foot img{width:22px}
 [dir=rtl] .st td:first-child,[dir=rtl] .st th:first-child{text-align:right}
-</style></head><body><div class="w">
+.t[onclick]{cursor:pointer}.t[onclick]:active{opacity:.7}</style></head><body><div class="w">
 <div class="bar0"><div class="hrow"><div class="brand"><img src="https://fittribeeg.com/cdn/shop/files/black.svg?v=1734551963" alt=""><div><small>FIT TRIBE</small><h1 id="h1">District 5</h1></div></div><button class="lang" id="lg" onclick="swap()">ع</button></div>
 <div class="upd" id="upd">…</div>
 <div class="nav"><button id="n0" class="on" onclick="go(0)"></button><button id="n1" onclick="go(1)"></button><button id="n2" onclick="go(2)"></button></div></div>
@@ -79,13 +79,14 @@ var D=null,TAB=0,DAY="",Q="",SQ="",SH=null,HI=null;
 function toast(s){var b=$("toast");b.textContent=s;b.classList.add("on");clearTimeout(b._t);b._t=setTimeout(function(){b.classList.remove("on");},3000);}
 function swap(){L=L==="ar"?"en":"ar";try{localStorage.setItem("ft_lang_d5",L);}catch(e){}chrome();render();}
 function chrome(){document.documentElement.lang=L;document.documentElement.dir=L==="ar"?"rtl":"ltr";$("h1").textContent=t("title");$("lg").textContent=L==="ar"?"EN":"ع";for(var i=0;i<3;i++){$("n"+i).textContent=t("n"+i);$("n"+i).className=TAB===i?"on":"";}if(D)$("upd").textContent=t("upd",{t:D.at});}
+function sc(){var e=document.querySelector(".tiles");e=e&&e.nextElementSibling;if(e)e.scrollIntoView({behavior:"smooth",block:"start"});}
 function go(i){TAB=i;chrome();render();window.scrollTo(0,0);}
 function quiet(){var a=document.activeElement;return document.hidden||(a&&/INPUT|TEXTAREA/.test(a.tagName))||document.querySelector(".ln.dirty");}
 function load(force){if(!force&&quiet())return;call("data").then(function(d){D=d;chrome();render();}).catch(function(e){$("upd").textContent=e.message;});}
 var SZ=["XS","S","M","L","XL","OTHER"];
 function render(){if(!D)return;var x="";
 if(TAB===0){var c=D.count,ls=c.lines,days=[];ls.forEach(function(l){if(days.indexOf(l.day)<0)days.push(l.day);});
-x+='<div class="tiles"><div class="t"><span>'+h(t("left"))+'</span><b>'+ls.length+'</b></div><div class="t"><span>'+h(c.behind?"":"")+'</span><small>'+h(c.behind)+'</small></div></div>';
+x+='<div class="tiles"><div class="t" onclick="sc()"><span>'+h(t("left"))+'</span><b>'+ls.length+'</b></div><div class="t" onclick="go(2)"><span>'+h(c.behind?"":"")+'</span><small>'+h(c.behind)+'</small></div></div>';
 x+='<div class="card" style="font-size:13px;color:#444">'+h(t("blind"))+'</div>';
 x+='<div class="chips"><button class="chip'+(DAY===""?" on":"")+'" onclick="DAY=\'\';render()">'+h(t("all"))+' '+ls.length+'</button>'+days.map(function(d){var n=ls.filter(function(l){return l.day===d;}).length;return '<button class="chip'+(DAY===d?" on":"")+'" onclick="DAY=\''+h(d)+'\';render()">'+h(d)+' '+n+'</button>';}).join("")+'</div>';
 x+='<input class="srch" placeholder="'+h(t("search"))+'" value="'+h(Q)+'" oninput="Q=this.value;fl()">';
@@ -93,7 +94,7 @@ var f=ls.filter(function(l){return(!DAY||l.day===DAY);});
 if(!ls.length)x+='<div class="empty">'+h(t("done"))+'</div>';
 x+='<div id="lst">'+f.map(function(l,i){var idx=ls.indexOf(l);return '<div class="card ln" data-k="'+h((l.style+" "+l.colour).toLowerCase())+'" id="l'+idx+'"><div style="display:flex;gap:10px;align-items:center">'+(l.img?'<img src="'+h(l.img)+'" loading="lazy" style="width:64px;height:80px;object-fit:cover;border-radius:10px;background:#eee;flex:none" onclick="window.open(this.src.split(\'?\')[0])">':'')+'<div><h2>'+h(l.colour)+'</h2><small>'+h(l.style)+' · '+h(l.day)+'</small></div></div><div class="szs">'+l.sizes.map(function(k,j){return '<div class="sz"><span>'+h(k===5?(l.other||"OTHER"):SZ[k])+'</span><input inputmode="numeric" pattern="[0-9]*" data-k="'+k+'" value="'+h(l.got[j])+'" oninput="dirty('+idx+')"></div>';}).join("")+'</div><button class="more" onclick="this.nextElementSibling.style.display=\'block\';this.remove()">'+h(t("addNote"))+'</button><input class="nt" style="display:none" placeholder="'+h(t("note"))+'" oninput="dirty('+idx+')"><button class="go" style="margin-top:8px" onclick="saveLine('+idx+')">'+h(t("save"))+'</button><div class="msg"></div></div>';}).join("")+'</div>';}
 if(TAB===1){var d=D.drawer;
-x+='<div class="tiles"><div class="t"><span>'+h(t("due"))+'</span><b style="font-size:17px">'+h(d.due)+'</b></div><div class="t"><span>'+h(t("lastOn"))+'</span><b style="font-size:17px">'+h(d.lastOn)+'</b><br><small>'+h(t("days"))+': '+h(d.days)+'</small></div></div>';
+x+='<div class="tiles"><div class="t" onclick="sc()"><span>'+h(t("due"))+'</span><b style="font-size:17px">'+h(d.due)+'</b></div><div class="t" onclick="sc()"><span>'+h(t("lastOn"))+'</span><b style="font-size:17px">'+h(d.lastOn)+'</b><br><small>'+h(t("days"))+': '+h(d.days)+'</small></div></div>';
 x+='<div class="card"><div style="font-size:13px;color:#444">'+h(t("rule"))+'</div>';
 x+='<label>'+h(t("counted"))+'</label><input id="dc" inputmode="numeric" pattern="[0-9]*" oninput="lft()">';
 x+='<label>'+h(t("sent"))+'</label><input id="ds" inputmode="numeric" pattern="[0-9]*" oninput="lft()">';

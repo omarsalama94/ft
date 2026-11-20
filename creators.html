@@ -52,7 +52,7 @@ input[type=date]{padding:9px 6px;font-size:14px;min-height:42px}
 .ck{display:flex;align-items:center;gap:8px;font-size:14px;margin-top:10px}.ck input{width:22px;height:22px}
 .lk a{font-size:12px;margin-inline-end:10px;color:var(--ink)}
 details.cr>summary{list-style:none;cursor:pointer}details.cr>summary::-webkit-details-marker{display:none}
-</style></head><body><div class="w">
+.t[onclick]{cursor:pointer}.t[onclick]:active{opacity:.7}</style></head><body><div class="w">
 <div class="bar0"><div class="hrow"><div class="brand"><img src="https://fittribeeg.com/cdn/shop/files/black.svg?v=1734551963" alt=""><div><small>FIT TRIBE</small><h1 id="h1">Creators</h1></div></div><button class="lang" id="lg" onclick="swap()">ع</button></div>
 <div class="upd" id="upd">…</div>
 <div class="nav"><button id="n0" class="on" onclick="go(0)"></button><button id="n1" onclick="go(1)"></button></div></div>
@@ -120,7 +120,7 @@ x+='<label>'+h(t("notes"))+'</label><input data-f="notes" value="'+h(c.notes)+'"
 x+='<button class="go" style="margin-top:12px" onclick="save('+i+')">'+h(t("save"))+'</button><div class="msg"></div></details>';return x;}
 function render(){if(!D)return;var x="",L2=D.list,posted=0,wait=0,late=0;
 L2.forEach(function(c){if(c.r1post)posted++;if(c.r2post)posted++;[1,2].forEach(function(n){var p="r"+n;if(c[p+"cut"]&&!isGo(c["go"+n])&&!c[p+"post"])wait++;});todo(c).forEach(function(z){if(z.k==="bad")late++;});});
-x+='<div class="tiles" style="grid-template-columns:1fr 1fr 1fr"><div class="t"><span>'+h(t("reels"))+'</span><b>'+posted+' / '+(L2.length*2)+'</b></div><div class="t"><span>'+h(t("wait"))+'</span><b>'+wait+'</b></div><div class="t"><span>'+h(t("late"))+'</span><b>'+late+'</b></div></div>';
+x+='<div class="tiles" style="grid-template-columns:1fr 1fr 1fr"><div class="t" onclick="go(1)"><span>'+h(t("reels"))+'</span><b>'+posted+' / '+(L2.length*2)+'</b></div><div class="t" onclick="go(0)"><span>'+h(t("wait"))+'</span><b>'+wait+'</b></div><div class="t" onclick="go(0)"><span>'+h(t("late"))+'</span><b>'+late+'</b></div></div>';
 var show=L2.map(function(c,i){return{c:c,i:i,n:todo(c).length};});
 if(TAB===0){show=show.filter(function(z){return z.n;});show.sort(function(a,b){return b.n-a.n;});}
 x+=show.length?show.map(function(z){return card(z.c,z.i);}).join(""):'<div class="empty">'+h(t("none"))+'</div>';

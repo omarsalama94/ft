@@ -98,7 +98,7 @@ h2{text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:var(--mute
 .age,.why,.tag{font-weight:600;letter-spacing:.02em}
 .fl{border-radius:14px;font-weight:600}
 .chart i{background:var(--ink)}.chart i.z{background:#e7e6e2}.box>b{display:block;text-transform:uppercase;letter-spacing:.1em;font:700 11px "Instrument Sans",sans-serif;color:var(--mute)}
-</style></head><body><div class="w">
+.t[onclick]{cursor:pointer}.t[onclick]:active{opacity:.7}</style></head><body><div class="w">
 <div class="bar0"><div class="hrow"><div class="brand"><img src="https://fittribeeg.com/cdn/shop/files/black.svg?v=1734551963" alt="FIT TRIBE"><div><small>FIT TRIBE</small><h1 id="h1"></h1></div></div><button class="lang" id="lang" onclick="setLang()">ع</button></div>
 <div class="upd" id="upd"></div>
 <div class="nav"><button id="nP" class="on" onclick="tab('p')"></button><button id="nC" onclick="tab('c')"></button></div></div>
@@ -149,6 +149,7 @@ function $(i){return document.getElementById(i);}
 function chrome(){document.documentElement.lang=L;document.documentElement.dir=L==="ar"?"rtl":"ltr";$("h1").textContent=t("title");
 $("lang").textContent=L==="ar"?"EN":"ع";$("nP").textContent=t("nP");$("nC").textContent=t("nC");if(D)$("upd").innerHTML="<i></i>"+h(t("upd",{t:D.at}));}
 function setLang(){L=L==="ar"?"en":"ar";try{localStorage.setItem("ft_lang",L);}catch(e){}chrome();if(D)render();if(C)renderC();}
+function sc(){var e=document.querySelector(".tiles");e=e&&e.parentNode.querySelector(".prog")||e;if(e)e.scrollIntoView({behavior:"smooth",block:"start"});}
 function tab(x){TAB=x;$("nP").classList.toggle("on",x==="p");$("nC").classList.toggle("on",x==="c");$("vp").classList.toggle("hide",x!=="p");$("vc").classList.toggle("hide",x!=="c");
 if(x==="c"&&!C)loadC();}
 function toast(msg,undoFn){var b=$("toast");$("tt").textContent=msg;var o=b.querySelector("button");if(o)o.remove();
@@ -159,7 +160,7 @@ function quiet(){return document.hidden||document.querySelector(".pz.open")||(do
 setInterval(function(){if(!quiet()&&TAB==="p")load();},60000);
 document.addEventListener("visibilitychange",function(){if(!document.hidden&&TAB==="p"&&!quiet())load();});
 function render(){var w=D.w,dn=D.done,tp=w.r+w.x+w.nd,html="";
-html+='<p class="sub">'+h(t("sub"))+'</p><div class="tiles"><div class="t"><b>'+w.n+'</b><span>'+t("tW")+'</span></div><div class="t"><b>'+w.parcels.length+'</b><span>'+t("tP")+'</span></div><div class="t"><b>'+dn.length+'</b><span>'+t("tT")+'</span></div><div class="t"><b>'+w.oldest+'d</b><span>'+t("tO")+'</span></div></div>';
+html+='<p class="sub">'+h(t("sub"))+'</p><div class="tiles"><div class="t" onclick="sc()"><b>'+w.n+'</b><span>'+t("tW")+'</span></div><div class="t" onclick="sc()"><b>'+w.parcels.length+'</b><span>'+t("tP")+'</span></div><div class="t" onclick="sc()"><b>'+dn.length+'</b><span>'+t("tT")+'</span></div><div class="t" onclick="sc()"><b>'+w.oldest+'d</b><span>'+t("tO")+'</span></div></div>';
 html+='<div class="prog">'+h(t("prog",{a:dn.length,b:w.n}))+'<div class="pbar"><i style="width:'+((dn.length+w.n)?Math.round(100*dn.length/(dn.length+w.n)):0)+'%"></i></div>';
 if(tp)html+='<div class="mix"><i style="width:'+100*w.r/tp+'%;background:#e8a49b"></i><i style="width:'+100*w.x/tp+'%;background:#f0c56b"></i><i style="width:'+100*w.nd/tp+'%;background:#a9b4c2"></i></div><div style="font-size:11px;color:#6b6a66;margin-top:4px">'+h(t("mix",{r:w.r,x:w.x,nd:w.nd}))+'</div>';
 html+='</div><div class="find"><input id="q" type="search" placeholder="'+h(t("find"))+'" value="'+h(Q)+'" oninput="Q=this.value;flt()"><button class="scan" onclick="$(\'cam\').click()">'+t("scan")+'</button></div>';

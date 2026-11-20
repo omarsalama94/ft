@@ -52,7 +52,7 @@ label{display:block;font:700 11px "Instrument Sans",sans-serif;letter-spacing:.0
 .bars{display:flex;align-items:flex-end;gap:6px;height:110px;margin-top:10px}.bars div{flex:1;text-align:center;font-size:10px;color:var(--mute)}.bars i{display:block;background:var(--ink);border-radius:6px 6px 0 0;margin-bottom:4px}
 .bars div.td i{background:#c9a24a}.li{font-size:13px;line-height:1.55;margin-top:8px}.open{display:inline-block;margin-top:10px;font:700 12px "Instrument Sans",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--ink);padding:9px 14px;border-radius:999px;text-decoration:none}
 .card h2{font-size:15px;margin:0;text-transform:none;letter-spacing:0;color:var(--ink)}.card h2 small{font-weight:400;color:var(--mute);font-size:12px}
-</style></head><body><div class="w">
+.ck{cursor:pointer}.ck:active{opacity:.75}</style></head><body><div class="w">
 <div class="bar0"><div class="hrow"><div class="brand"><img src="https://fittribeeg.com/cdn/shop/files/black.svg?v=1734551963" alt=""><div><small>FIT TRIBE</small><h1>Owner</h1></div></div><button class="lang" onclick="load(true)">↻</button></div>
 <div class="upd" id="upd">…</div>
 <div class="nav"><button id="n0" onclick="go(0)">Today</button><button id="n1" onclick="go(1)">Team</button><button id="n2" onclick="go(2)">Money</button><button id="n3" onclick="go(3)">Stock</button><button id="n4" onclick="go(4)">Approvals</button></div></div>
@@ -82,13 +82,14 @@ function go(i){TAB=i;for(var k=0;k<5;k++)$("n"+k).className=k===i?"on":"";render
 function load(){call("owner").then(function(o){O=o;keep();if(!busyForm())render();}).catch(function(e){$("upd").textContent=e.message;});
 post(APIF,"sales").then(function(s){S=s;SE="";keep();if(!busyForm())render();}).catch(function(e){SE=e.message;render();});}
 function tl(v,l){return '<div><b>'+h(v)+'</b><span>'+h(l)+'</span></div>';}
-function card(t,sub,body,url){return '<div class="card"><h2>'+h(t)+(sub?' <small>'+h(sub)+'</small>':'')+'</h2>'+body+(url?'<a class="open" target="_blank" href="'+h(url)+'">Open app →</a>':'')+'</div>';}
+function card(t,sub,body,url){return '<div class="card'+(url?' ck" data-u="'+h(url)+'"':'"')+'><h2>'+h(t)+(sub?' <small>'+h(sub)+'</small>':'')+'</h2>'+body+(url?'<a class="open" target="_blank" href="'+h(url)+'">Open app →</a>':'')+'</div>';}
+document.addEventListener("click",function(e){var c=e.target.closest("[data-u]");if(!c||e.target.closest("a,button,input,select,label,textarea"))return;window.open(c.getAttribute("data-u"),"_blank");});
 function app(w){var a=(O.apps||[]).filter(function(x){return x.who===w;})[0];return a?a.url:"";}
-function flags(only){return (O.flags||[]).filter(function(z){return !only||z.l===only;}).map(function(z){return '<div class="fl '+z.l+'"><b>'+h(z.who)+'</b>'+h(z.t)+'</div>';}).join("");}
+function flags(only){return (O.flags||[]).filter(function(z){return !only||z.l===only;}).map(function(z){var u=app(z.who);return '<div class="fl '+z.l+(u?' ck" data-u="'+h(u)+'"':'"')+'><b>'+h(z.who)+'</b>'+h(z.t)+'</div>';}).join("");}
 function render(){if(!O){return;}$("upd").textContent="Updated "+O.at+(S?" · sales "+S.at:"");var x="",R=O.roaa||{},St=O.stock||{},F=O.farida||{},Di=O.dina||{},Ha=O.haidy||{},Cr=O.creators||{},D5=O.d5||{},RL=O.roaaLast;
 if(TAB===0){if(S){var td=S.today,y=S.days[S.days.length-2],wk=S.days.slice(0,7),avg=wk.reduce(function(a,d){return a+d.egp;},0)/7,mx=Math.max.apply(null,S.days.map(function(d){return d.egp;}))||1;
-x+='<div class="tiles"><div class="t"><span>Sales today</span><b>'+f(td.egp)+'</b><small>EGP · '+td.n+' orders</small></div><div class="t"><span>AOV today</span><b>'+f(td.n?td.egp/td.n:0)+'</b><small>EGP</small></div></div>';
-x+=card("Last 8 days","EGP, cancelled and test orders left out",'<div class="g3">'+tl(f(y.egp),"yesterday · "+y.n+" orders")+tl(f(avg),"7-day average")+tl(f(td.posEgp),"District 5 today · "+td.pos)+'</div><div class="bars">'+S.days.map(function(d,i){return '<div class="'+(i===S.days.length-1?"td":"")+'"><i style="height:'+Math.round(80*d.egp/mx)+'px"></i>'+d.d.slice(8)+'</div>';}).join("")+'</div>');}
+x+='<div class="tiles ck" data-u="https://admin.shopify.com/store/omar-salama94/orders"><div class="t"><span>Sales today</span><b>'+f(td.egp)+'</b><small>EGP · '+td.n+' orders</small></div><div class="t"><span>AOV today</span><b>'+f(td.n?td.egp/td.n:0)+'</b><small>EGP</small></div></div>';
+x+=card("Last 8 days","EGP, cancelled and test orders left out · tap for Shopify analytics",'<div class="g3">'+tl(f(y.egp),"yesterday · "+y.n+" orders")+tl(f(avg),"7-day average")+tl(f(td.posEgp),"District 5 today · "+td.pos)+'</div><div class="bars">'+S.days.map(function(d,i){return '<div class="'+(i===S.days.length-1?"td":"")+'"><i style="height:'+Math.round(80*d.egp/mx)+'px"></i>'+d.d.slice(8)+'</div>';}).join("")+'</div>',"https://admin.shopify.com/store/omar-salama94/analytics");}
 else x+='<div class="card">'+(SE?"Sales could not load: "+h(SE):"Loading sales…")+'</div>';
 x+=(O.flags&&O.flags.length?flags():'<div class="fl green"><b>✓</b>Nothing needs you right now.</div>');}
 if(TAB===1){x+=card("Roaa","returns + stock count",R.err?h(R.err):'<div class="g3">'+tl(R.n,"pieces waiting")+tl(R.today,"answered today")+tl(R.oldest+"d","oldest waiting")+'</div><div class="g3">'+tl(St.next?"Day "+St.next:"—","next count day")+tl(St.last,"last day ticked")+tl(St.since==null?"—":St.since+"d","since last count")+'</div>',app("Roaa"));
@@ -105,16 +106,16 @@ x+='<label>Amount (EGP)</label><input id="pa" inputmode="numeric"><label>How</la
 x+='<label>Date</label><input id="pd" type="date"><label>Screenshot'+(PH==="Cash"?" (optional for cash)":"")+'</label><input id="pf" type="file" accept="image/*,application/pdf"><label>Note</label><input id="pn" placeholder="e.g. Winter shoot day 2">';
 x+='<button class="go" style="margin-top:12px" id="pb" onclick="sendPay()">Save</button><button class="more" onclick="FORM=false;render()">Cancel</button><div class="msg" id="pm"></div></div>';}
 x+=(P.rows&&P.rows.length?'<div class="li">'+P.rows.map(function(r){return '<b>'+h(r.d)+'</b> · '+h(r.to)+(r.who?' · '+h(r.cat)+' · '+h(r.who):'')+' · <b>'+f(r.amt)+'</b> '+h(r.how)+(r.shot?' <a target="_blank" href="'+h(r.shot)+'">🧾</a>':'');}).join("<br>")+'</div>':'')+(P.url?'<div class="li"><a target="_blank" href="'+h(P.url)+'">Open the sheet</a></div>':'')+'</div>';
-x+=card("Refunds to pay","Farida",F.err?h(F.err):'<div class="g3">'+tl(f(F.egp),"EGP · "+F.n+" refunds")+tl(f(F.weekEGP),"paid last 7 days · "+F.weekN)+tl(F.old5,"waiting 5+ days")+'</div>');
-x+=card("District 5 drawer","Dina Gamal",Di.err?h(Di.err):'<div class="li">Transfer due: <b>'+h(Di.due)+'</b><br>Last counted: '+h(Di.since)+' ('+h(Di.days)+' days)'+(Di.last?'<br>Last transfer: '+h(Di.last.date)+' · '+h(Di.last.sent)+' EGP':'')+'</div>');
-x+=card("Haidy's shoot money","",Ha.err?h(Ha.err):'<div class="g3">'+tl(f(Ha.left),"EGP left")+tl(Ha.sent,"you sent")+tl(f(Ha.spent),"EGP spent")+'</div>');
-x+=card("Creators' product","this month at list price",Cr.err?h(Cr.err):'<div class="g3">'+tl(f(Cr.items),"EGP taken")+tl(Cr.live,"live creators")+'</div><div class="li">Commission is worked out on PAY on the 3rd.</div>');}
+x+=card("Refunds to pay","Farida",F.err?h(F.err):'<div class="g3">'+tl(f(F.egp),"EGP · "+F.n+" refunds")+tl(f(F.weekEGP),"paid last 7 days · "+F.weekN)+tl(F.old5,"waiting 5+ days")+'</div>',app("Farida"));
+x+=card("District 5 drawer","Dina Gamal",Di.err?h(Di.err):'<div class="li">Transfer due: <b>'+h(Di.due)+'</b><br>Last counted: '+h(Di.since)+' ('+h(Di.days)+' days)'+(Di.last?'<br>Last transfer: '+h(Di.last.date)+' · '+h(Di.last.sent)+' EGP':'')+'</div>',app("Dina Gamal"));
+x+=card("Haidy's shoot money","",Ha.err?h(Ha.err):'<div class="g3">'+tl(f(Ha.left),"EGP left")+tl(Ha.sent,"you sent")+tl(f(Ha.spent),"EGP spent")+'</div>',app("Haidy"));
+x+=card("Creators' product","this month at list price",Cr.err?h(Cr.err):'<div class="g3">'+tl(f(Cr.items),"EGP taken")+tl(Cr.live,"live creators")+'</div><div class="li">Commission is worked out on PAY on the 3rd.</div>',app("Dina"));}
 if(TAB===3){x+=card("Office stock count","Roaa",St.err?h(St.err):'<div class="g3">'+tl(St.next?"Day "+St.next:"—","next day")+tl(St.last,"last ticked")+tl(St.since==null?"—":St.since+"d","since")+'</div>'+(RL?'<div class="li">Last filed count: '+h(RL.date)+' · '+RL.lines+' lines · '+f(RL.pieces)+' pieces'+(RL.chk?(RL.diffs?' · <b style="color:var(--bad)">'+RL.diffs+' sizes off</b>':' · all matched'):' · not checked against the system')+'</div>':''),app("Roaa"));
 x+=card("District 5 stock","from Shopify · "+(D5.read||""),D5.err?h(D5.err):'<div class="g3">'+tl(f(D5.pieces),"pieces")+tl(D5.lines,"lines")+tl(D5.neg,"lines below zero")+'</div>'+(D5.negList&&D5.negList.length?'<div class="li"><b>Below zero:</b><br>'+D5.negList.map(h).join("<br>")+'</div>':'')+'<div class="li">'+h(D5.behind)+'</div>',app("Dina Gamal"));}
 if(TAB===4){var go=(Cr.go||[]),ask=(F.ask||[]);x+=card("Reels waiting for your GO",go.length+" cut"+(go.length===1?"":"s"),go.length?'<div class="li">'+go.map(h).join("<br>")+'</div>':'<div class="li">None.</div>',app("Dina"));
 x+=card("Farida is asking you",ask.length+"",ask.length?'<div class="li">'+ask.map(h).join("<br>")+'</div>':'<div class="li">Nothing.</div>',app("Farida"));
 if(Cr.tierOff&&Cr.tierOff.length)x+=card("Creator tiers to fix","ROSTER vs THIS MONTH",'<div class="li">'+Cr.tierOff.map(h).join("<br>")+'</div>');
-x+=card("All flags","",flags()||'<div class="li">None.</div>');}
+x+='<div class="card"><h2>All flags</h2>'+(flags()||'<div class="li">None.</div>')+'</div>';}
 $("v").innerHTML=x;if(FORM&&TAB===2)restoreForm();}
 go(0);if(O)render();load();setInterval(function(){if(!document.hidden)load();},120000);
 </script></body></html>

@@ -46,7 +46,7 @@ label{display:block;font:700 11px "Instrument Sans",sans-serif;letter-spacing:.0
 select{font:inherit;width:100%;padding:11px;border:1.5px solid #e3e1dc;border-radius:12px;background:#fafaf8;font-size:16px;-webkit-appearance:none}
 .pick{display:flex;flex-wrap:wrap;gap:6px}.pick .chip{cursor:pointer}
 .row h2{font-size:15px;margin:0}.row small{color:var(--mute)}
-</style></head><body><div class="w">
+.t[onclick]{cursor:pointer}.t[onclick]:active{opacity:.7}</style></head><body><div class="w">
 <div class="bar0"><div class="hrow"><div class="brand"><img src="https://fittribeeg.com/cdn/shop/files/black.svg?v=1734551963" alt=""><div><small>FIT TRIBE</small><h1 id="h1">Shoot payments</h1></div></div><button class="lang" id="lg" onclick="swap()">ع</button></div>
 <div class="upd" id="upd">…</div>
 <div class="nav"><button id="n0" class="on" onclick="go(0)"></button><button id="n1" onclick="go(1)"></button></div></div>
@@ -86,7 +86,7 @@ function chips(id,list,cur){return '<div class="pick" id="'+id+'">'+list.map(fun
 function pk(b){var p=b.parentNode;p.querySelectorAll(".chip").forEach(function(c){c.classList.remove("on");});b.classList.add("on");if(p.id==="ph")HOWV=b.getAttribute("data-v");if(p.id==="pw"){WHATV=b.getAttribute("data-v");$("pn").placeholder=t(WHATV==="Other"?"noteO":"note");}}
 function val(p){var c=p.querySelector(".chip.on");return c?c.getAttribute("data-v"):"";}
 function render(){if(!D)return;var x="";
-x+='<div class="tiles"><div class="t"><span>'+h(t("left"))+'</span><b>'+h(D.left)+'</b></div><div class="t"><span>'+h(t("month"))+'</span><b>'+h(D.month)+'</b></div></div>';
+x+='<div class="tiles"><div class="t" onclick="go(1)"><span>'+h(t("left"))+'</span><b>'+h(D.left)+'</b></div><div class="t" onclick="go(1)"><span>'+h(t("month"))+'</span><b>'+h(D.month)+'</b></div></div>';
 if(TAB===0){
 x+='<div class="card"><div style="font-size:13px;color:#444">'+h(t("rule"))+'</div>';
 x+='<label>'+h(t("shot"))+'</label><input id="pf" type="file" accept="image/*,application/pdf">';
