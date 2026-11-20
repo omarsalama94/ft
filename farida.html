@@ -33,6 +33,7 @@
 .tag.card{background:#e4f0fa;color:#1d5a88}.tag.portal{background:#fbefdf;color:#8a5414}.tag.hold{background:#fff1d6;color:#7a4b00}
 .d{font-size:13px;color:#555;line-height:1.5}
 .qa{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.qa a,.qa button{font-size:13px;padding:7px 10px;border-radius:18px;border:1px solid var(--line);background:#f7f6f2;color:var(--ink);text-decoration:none;cursor:pointer;font-family:inherit}
+.bx{margin-top:8px;font-size:13px}.bx.mu{color:var(--mute)}.bx b{font-weight:700}.bimg{display:flex;gap:8px;overflow-x:auto;margin-top:6px}.bimg img{height:170px;border-radius:10px;display:block;background:#f2f1ee}.bpb{margin-top:6px;font:700 12.5px inherit;padding:7px 10px;border-radius:999px;border:0;background:#f2f2ef;cursor:pointer}
 .qa .wa{background:#e7f8ee;border-color:#bfe8cf;color:#146c3a}
 .bt{display:flex;gap:6px;margin-top:10px}.bt button{flex:1}
 button{padding:12px 6px;font-size:15px;border:0;border-radius:10px;cursor:pointer;font-family:inherit}
@@ -102,7 +103,7 @@ all:["All","الكل"],instapay:["InstaPay","إنستاباي"],card:["Card","ك
 sort:["Sort:","ترتيب:"],sOld:["oldest first","الأقدم الأول"],sBig:["biggest first","الأكبر الأول"],
 wait:["{d}d waiting","مستني {d} يوم"],today:["came back today","رجع النهارده"],hold:["PAY NOW? says {p}","«ادفعي؟» مكتوب {p}"],onhold:["On hold","متعلّق"],
 paid:["Paid","اتدفع"],more:["Other ▾","تاني ▾"],
-cAmt:["Copy {a}","انسخي {a}"],cIp:["Copy InstaPay","انسخي رقم إنستاباي"],wa:["WhatsApp","واتساب"],shop:["Open in Shopify","افتحي في شوبيفاي"],bosta:["Open in Bosta","افتحي في بوسطة"],bostaS:["Bosta","بوسطة"],bCopied:["Phone copied — in Bosta pick Phone Number and paste","الرقم اتنسخ — في بوسطة اختاري Phone Number والصقيه"],copied:["Copied {x}","اتنسخ {x}"],
+cAmt:["Copy {a}","انسخي {a}"],cIp:["Copy InstaPay","انسخي رقم إنستاباي"],wa:["WhatsApp","واتساب"],shop:["Open in Shopify","افتحي في شوبيفاي"],bosta:["Open in Bosta","افتحي في بوسطة"],bostaS:["Bosta","بوسطة"],bLd:["Checking Bosta…","بنشوف بوسطة…"],bPic:["📷 Return photos ({n})","📷 صور المرتجع ({n})"],bNoPic:["No return photos on Bosta","مفيش صور للمرتجع على بوسطة"],bNone:["Not found on Bosta yet","مش لاقيينه على بوسطة لسه"],bCopied:["Phone copied — in Bosta pick Phone Number and paste","الرقم اتنسخ — في بوسطة اختاري Phone Number والصقيه"],copied:["Copied {x}","اتنسخ {x}"],
 how:["How you paid","دفعتي إزاي"],ipO:["InstaPay","إنستاباي"],cdO:["Card refund in Shopify","استرجاع على الكارت من شوبيفاي"],ptO:["Paymob / Geidea portal","بوابة Paymob / Geidea"],
 sent:["Amount you sent (EGP)","المبلغ اللي حوّلتيه (جنيه)"],shot:["InstaPay screenshot (required)","سكرين شوت إنستاباي (لازم)"],shotO:["Screenshot (optional)","سكرين شوت (اختياري)"],
 note:["Note (optional)","ملاحظة (اختياري)"],notePh:["Reference number, or anything Omar should know","رقم مرجعي أو أي حاجة عمر لازم يعرفها"],
@@ -146,22 +147,22 @@ if(!ok&&navigator.clipboard)navigator.clipboard.writeText(x).catch(function(){})
 function vis(){var r=D.rows.slice();if(FL==="old3")r=r.filter(function(x){return x.days>=3;});else if(FL==="hold")r=r.filter(function(x){return /pending/i.test(x.ans);});else if(FL!=="all")r=r.filter(function(x){return x.m===FL;});
 r.sort(SO==="old"?function(a,b){return b.days-a.days;}:function(a,b){return b.amt-a.amt;});return r;}
 function render(){var s=D.s,rows=D.rows,x="",tot=s.waitEGP||1;
-x+='<p class="sub">'+h(t("sub"))+'</p><div class="tiles"><div class="t big"><div><span>'+h(t("still"))+'</span><b>'+fm(s.waitEGP)+' '+h(t("egp"))+'</b></div><small>'+s.waitN+' '+h(t("refunds"))+'</small></div>';
-x+='<div class="t" onclick="rp(\'week\')" style="cursor:pointer"><span>'+h(t("week"))+'</span><b>'+fm(s.weekEGP)+'</b><small>'+h(t("l7",{n:s.weekN}))+'</small></div><div class="t"><span>'+h(t("month"))+'</span><b>'+fm(s.monthEGP)+'</b><small>'+s.monthN+' '+h(t("refunds"))+'</small></div>';
-x+='<div class="t"><span>'+h(t("oldest"))+'</span><b>'+h(t("days",{d:s.oldest}))+'</b></div><div class="t"><span>'+h(t("avg"))+'</span><b>'+fm(s.waitN?s.waitEGP/s.waitN:0)+'</b></div></div>';
+x+='<p class="sub">'+h(t("sub"))+'</p><div class="tiles"><div class="t big" onclick="go(\'all\')" style="cursor:pointer"><div><span>'+h(t("still"))+'</span><b>'+fm(s.waitEGP)+' '+h(t("egp"))+'</b></div><small>'+s.waitN+' '+h(t("refunds"))+'</small></div>';
+x+='<div class="t" onclick="rp(\'week\')" style="cursor:pointer"><span>'+h(t("week"))+'</span><b>'+fm(s.weekEGP)+'</b><small>'+h(t("l7",{n:s.weekN}))+'</small></div><div class="t" onclick="rp(\'\')" style="cursor:pointer"><span>'+h(t("month"))+'</span><b>'+fm(s.monthEGP)+'</b><small>'+s.monthN+' '+h(t("refunds"))+'</small></div>';
+x+='<div class="t" onclick="go(\'old3\')" style="cursor:pointer"><span>'+h(t("oldest"))+'</span><b>'+h(t("days",{d:s.oldest}))+'</b></div><div class="t" onclick="go(\'all\')" style="cursor:pointer"><span>'+h(t("avg"))+'</span><b>'+fm(s.waitN?s.waitEGP/s.waitN:0)+'</b></div></div>';
 x+='<div class="box"><b>'+h(t("split"))+'</b><div class="mix"><i style="width:'+100*s.by.instapay[1]/tot+'%;background:var(--ip)"></i><i style="width:'+100*s.by.card[1]/tot+'%;background:var(--cd)"></i><i style="width:'+100*s.by.portal[1]/tot+'%;background:var(--pt)"></i></div><div class="lg">';
-[["instapay","--ip"],["card","--cd"],["portal","--pt"]].forEach(function(m){x+='<span><i class="dot" style="background:var('+m[1]+')"></i>'+h(t(m[0]))+' '+s.by[m[0]][0]+' · '+fm(s.by[m[0]][1])+'</span>';});
+[["instapay","--ip"],["card","--cd"],["portal","--pt"]].forEach(function(m){x+='<span onclick="go(\''+m[0]+'\')" style="cursor:pointer"><i class="dot" style="background:var('+m[1]+')"></i>'+h(t(m[0]))+' '+s.by[m[0]][0]+' · '+fm(s.by[m[0]][1])+'</span>';});
 x+='</div></div><div class="box"><b>'+h(t("chart"))+'</b><div class="chart">';s.days.forEach(function(d){x+='<div title="'+d.n+' · '+fm(d.egp)+'"><i class="'+(d.egp?"":"z")+'" style="height:'+(s.max?Math.max(3,Math.round(100*d.egp/s.max)):3)+'%"></i><span>'+h(d.label)+'</span></div>';});x+='</div></div>';
 var nHold=rows.filter(function(r){return /pending/i.test(r.ans);}).length,n3=rows.filter(function(r){return r.days>=3;}).length;
-x+='<div class="chips">'+[["all",rows.length],["instapay",s.by.instapay[0]],["card",s.by.card[0]],["portal",s.by.portal[0]],["old3",n3],["hold",nHold]].map(function(c){return '<button class="chip'+(FL===c[0]?" on":"")+'" onclick="FL=\''+c[0]+'\';render()">'+h(t(c[0]==="hold"?"holdF":c[0]))+' '+c[1]+'</button>';}).join("")+'</div>';
+x+='<div class="chips" id="lst">'+[["all",rows.length],["instapay",s.by.instapay[0]],["card",s.by.card[0]],["portal",s.by.portal[0]],["old3",n3],["hold",nHold]].map(function(c){return '<button class="chip'+(FL===c[0]?" on":"")+'" onclick="FL=\''+c[0]+'\';render()">'+h(t(c[0]==="hold"?"holdF":c[0]))+' '+c[1]+'</button>';}).join("")+'</div>';
 x+='<div class="sort">'+h(t("sort"))+'<a class="'+(SO==="old"?"on":"")+'" onclick="SO=\'old\';render()">'+h(t("sOld"))+'</a>·<a class="'+(SO==="big"?"on":"")+'" onclick="SO=\'big\';render()">'+h(t("sBig"))+'</a></div>';
 if(!rows.length)x+='<div class="empty">'+h(t("none"))+'</div>';
-vis().forEach(function(r){var i=D.rows.indexOf(r),ip=ipAddr(r),wa=waLink(r),hold=/pending/i.test(r.ans),dig=r.order.replace(/\D/g,"");
+vis().forEach(function(r){var i=D.rows.indexOf(r),ip=ipAddr(r),wa=waLink(r),hold=/pending/i.test(r.ans),dig=r.order.replace(/\D/g,""),tn=r.trk||(BS[r.order]&&BS[r.order].tn)||"";
 x+='<div class="c '+r.m+'" id="c'+i+'"><div class="top"><span class="o">'+h(r.order)+'</span><span class="a">'+h(r.amount)+' '+h(t("egp"))+'</span></div><div class="n">'+h(r.name)+'</div><div class="tags">';
 x+=(r.proof?'<span class="tag old">📷 '+h(t("needShot"))+'</span>':'')+'<span class="tag '+(r.m==="instapay"?"ip":r.m)+'">'+h(t(r.m))+'</span><span class="tag'+(r.days>=3?" old":"")+'">'+h(r.days?t("wait",{d:r.days}):t("today"))+'</span>';
 if(r.pay&&r.pay!=="PAY")x+='<span class="tag hold">'+h(t("hold",{p:r.pay}))+'</span>';if(hold)x+='<span class="tag hold">'+h(t("onhold"))+'</span>';
-x+='</div><div class="d">'+h(r.how)+'<br>'+h(r.why)+(r.back?' · '+h(r.back):'')+(hold&&r.note?'<br><i>'+h(r.note)+'</i>':'')+'</div>';
-x+='<div class="qa"><button onclick="copy(\''+fm(r.amt).replace(/,/g,"")+'\')">⧉ '+h(t("cAmt",{a:fm(r.amt)}))+'</button>'+(ip?'<button onclick="copy(\''+h(ip)+'\')">⧉ '+h(t("cIp"))+'</button>':'')+(wa?'<a class="wa" target="_blank" href="'+h(wa)+'">💬 '+h(t("wa"))+'</a>':'')+'<a target="_blank" href="https://admin.shopify.com/store/omar-salama94/orders?query='+dig+'">↗ '+h(t("shop"))+'</a>'+(r.trk?'<a target="_blank" href="https://business.bosta.co/orders/'+h(r.trk)+'">📦 '+h(t("bosta"))+'</a>':'<a target="_blank" href="https://business.bosta.co/orders" onclick="bostaCopy('+i+')">📦 '+h(t("bostaS"))+'</a>')+'</div>';
+x+='</div><div class="d">'+h(r.how)+'<br>'+h(r.why)+(r.back?' · '+h(r.back):'')+(hold&&r.note?'<br><i>'+h(r.note)+'</i>':'')+'</div><div id="bs'+i+'">'+bsHtml(r,i)+'</div>';
+x+='<div class="qa"><button onclick="copy(\''+fm(r.amt).replace(/,/g,"")+'\')">⧉ '+h(t("cAmt",{a:fm(r.amt)}))+'</button>'+(ip?'<button onclick="copy(\''+h(ip)+'\')">⧉ '+h(t("cIp"))+'</button>':'')+(wa?'<a class="wa" target="_blank" href="'+h(wa)+'">💬 '+h(t("wa"))+'</a>':'')+'<a target="_blank" href="https://admin.shopify.com/store/omar-salama94/orders?query='+dig+'">↗ '+h(t("shop"))+'</a>'+(tn?'<a target="_blank" href="https://business.bosta.co/orders/'+h(tn)+'">📦 '+h(t("bosta"))+'</a>':'<a id="bl'+i+'" target="_blank" href="https://business.bosta.co/orders" onclick="bostaCopy('+i+')">📦 '+h(t("bostaS"))+'</a>')+'</div>';
 x+='<div class="bt"><button class="pb" onclick="op('+i+',\'open\')">'+h(t("paid"))+'</button><button class="mb" onclick="op('+i+',\'mo\')">'+h(t("more"))+'</button></div>';
 x+='<div class="more"><button onclick="oth('+i+',\'exchanged\')">↔ '+h(t("exch"))+'</button><button onclick="oth('+i+',\'hold\')">⏸ '+h(t("holdB"))+'</button><button onclick="oth('+i+',\'ask\')">? '+h(t("ask"))+'</button><button class="cn" onclick="cl('+i+')">'+h(t("cancel"))+'</button></div>';
 x+='<div class="f"><label>'+h(t("how"))+'</label><select class="me" onchange="meth('+i+')"><option value="instapay"'+(r.m==="instapay"?" selected":"")+'>'+h(t("ipO"))+'</option><option value="card"'+(r.m==="card"?" selected":"")+'>'+h(t("cdO"))+'</option><option value="portal"'+(r.m==="portal"?" selected":"")+'>'+h(t("ptO"))+'</option></select>';
@@ -172,7 +173,18 @@ x+='<h2 id="rph">'+h(t("recent"))+'</h2><div class="tiles pt"><button class="t'+
 var LL=RP==="today"?s.paid.filter(function(p){return p.td;}):RP==="week"?s.paid:s.recent;
 x+='<div class="sort">'+h(t(RP==="today"?"pToday":RP==="week"?"pWeek":"pLast"))+' · '+LL.length+(RP?' <a class="on" onclick="rp(\'\')">'+h(t("pBack"))+'</a>':'')+'</div>';
 x+='<div class="dl">'+(LL.length?LL.map(function(p){return rpRow(p,!!RP);}).join(""):'<div class="di">'+h(t("pNone"))+'</div>')+'</div>';
-$("v").innerHTML=x;document.querySelectorAll("details.rp[open]").forEach(thumbs);}
+$("v").innerHTML=x;document.querySelectorAll("details.rp[open]").forEach(thumbs);bsLoad();}
+var BS={},BQ=0;
+function bsHtml(r,i){var b=BS[r.order];if(!b||b.ld)return '<div class="bx mu">📦 '+h(t("bLd"))+'</div>';if(b.state!=="ok")return b.state==="none"?'<div class="bx mu">📦 '+h(t("bNone"))+'</div>':"";
+var x='<div class="bx">📦 <b>'+h(b.tn)+'</b> · '+h(b.st)+(b.at?' · '+h(b.at):'')+'</div>';
+if(!b.imgs||!b.imgs.length)return x+'<div class="bx mu">'+h(t("bNoPic"))+'</div>';
+if(b.show)return x+'<div class="bimg">'+b.imgs.map(function(u){return '<a href="'+h(u)+'" target="_blank"><img src="'+h(u)+'"></a>';}).join("")+'</div>';
+return x+'<button class="bpb" onclick="bsPic('+i+')">'+h(t("bPic",{n:b.imgs.length}))+'</button>';}
+function bsPic(i){var r=D.rows[i],b=BS[r.order];if(b){b.show=!b.show;bsPaint(r);}}
+function bsPaint(r){var i=D.rows.indexOf(r),e=$("bs"+i),b=BS[r.order];if(e)e.innerHTML=bsHtml(r,i);var l=$("bl"+i);if(l&&b&&b.tn){l.href="https://business.bosta.co/orders/"+b.tn;l.onclick=null;l.textContent="📦 "+t("bosta");}}
+function bsLoad(){var q=vis().filter(function(r){return !BS[r.order];});q.forEach(function(r){BS[r.order]={ld:1};});var n=0;
+function nx(){var r=q[n++];if(!r)return;call("bosta",{order:r.order,trk:r.trk,phone:phone(r)}).then(function(b){BS[r.order]=b||{state:"none"};bsPaint(r);nx();}).catch(function(){BS[r.order]={state:"err"};bsPaint(r);nx();});}
+nx();nx();nx();}
 function rpRow(p,o){var links=(String(p.ref).match(/https?:\/\/\S+/g)||[]),txt=String(p.ref).replace(/https?:\/\/\S+/g,"").replace(/\s*·\s*$/,"").trim(),dig=String(p.order).replace(/\D/g,"");
 var sh=links.map(function(u){var m=u.match(/\/d\/([\w-]+)/)||u.match(/id=([\w-]+)/);return m?'<a class="shot" target="_blank" href="'+h(u)+'"><img data-id="'+h(m[1])+'"'+(TH[m[1]]?' src="'+TH[m[1]]+'"':'')+' alt=""></a>':'';}).join("");
 return '<details class="rp'+(o?' ao" open':'"')+' ontoggle="thumbs(this)"><summary class="di"><span><b>'+h(p.order)+'</b> · '+h(p.name)+'<br><small style="color:#6b6a66">'+h(p.date)+' · '+h(p.how)+'</small>'+svB(p.sv)+(/instapay/i.test(p.how)&&!/https?:/.test(String(p.ref))?'<br><span class="sv no">'+h(t("noShot"))+'</span>':'')+'</span><b>'+fm(p.amt)+' ›</b></summary><div class="rpd">'+
@@ -181,6 +193,7 @@ return '<details class="rp'+(o?' ao" open':'"')+' ontoggle="thumbs(this)"><summa
 '<div class="qa">'+links.map(function(u){return '<a target="_blank" href="'+h(u)+'">🧾 '+h(t("rShot"))+'</a>';}).join("")+'<a target="_blank" href="https://admin.shopify.com/store/omar-salama94/orders?query='+dig+'">↗ '+h(t("shop"))+'</a></div></div></details>';}
 var RP="",TH={};
 function svB(v){if(!v||v.state==="na")return "";return v.state==="ok"?'<br><span class="sv ok">'+h(t("svOk",{a:fm(v.amt),w:v.at}))+'</span>':v.state==="diff"?'<br><span class="sv wn">'+h(t("svDiff",{a:fm(v.amt)}))+'</span>':'<br><span class="sv no">'+h(t("svNo"))+'</span>';}
+function go(f){FL=f;render();var e=$("lst");if(e)e.scrollIntoView({behavior:"smooth"});}
 function rp(m){RP=(RP===m?"":m);render();var e=$("rph");if(e)e.scrollIntoView({behavior:"smooth"});}
 function thumbs(d){if(!d.open)return;d.querySelectorAll("img[data-id]:not([src])").forEach(function(im){var id=im.getAttribute("data-id");if(TH[id]){im.src=TH[id];return;}im.parentNode.classList.add("ld");call("thumb",{id:id}).then(function(u){if(u){TH[id]=u;im.src=u;im.parentNode.classList.remove("ld");}else im.parentNode.remove();}).catch(function(){im.parentNode.remove();});});}
 function C(i){return $("c"+i);}
